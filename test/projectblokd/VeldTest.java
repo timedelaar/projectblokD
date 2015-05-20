@@ -52,9 +52,9 @@ public class VeldTest {
      */
     @Test
     public void testGetSpelItem () {
-        Held held = new Held();
-        veld.setSpelItem(held);
-        SpelItem expResult = held;
+        Muur muur = new Muur();
+        veld.setSpelItem(muur);
+        SpelItem expResult = muur;
         SpelItem result = veld.getSpelItem();
         assertEquals(expResult, result);
     }
@@ -64,8 +64,8 @@ public class VeldTest {
      */
     @Test
     public void testVerwijderSpelItem () {
-        Held held = new Held();
-        veld.setSpelItem(held);
+        Muur muur = new Muur();
+        veld.setSpelItem(muur);
         veld.verwijderSpelItem();
         SpelItem expResult = null;
         SpelItem result = veld.getSpelItem();
