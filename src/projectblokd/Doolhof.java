@@ -4,7 +4,6 @@
  */
 package projectblokd;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
@@ -19,15 +18,20 @@ public class Doolhof extends JPanel {
     Timer timer;
     private int minuten;
     private int secondes;
-    private int[][] doolhof = {{1, 1, 1, 1},
-                               {1, 0, 0, 1},
-                               {1, 0, 0, 1},
-                               {1, 1, 0, 1}};
+    private int[][] doolhof = {{1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+                               {1, 2, 0, 0, 0, 0, 0, 0, 0, 1},
+                               {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+                               {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+                               {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+                               {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+                               {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+                               {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+                               {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+                               {1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
     
     public Doolhof () {
         init();
         startScoreTimer();
-        startKeyBoardListener();
         maakDoolhof();
     }
     
@@ -55,9 +59,9 @@ public class Doolhof extends JPanel {
         timer.start();
     }
     
-    private void startKeyBoardListener () {
+    private void startKeyBoardListener (Held held) {
         setFocusable(true);
-        KeyBoardListener KBListener = new KeyBoardListener(new Held());
+        KeyBoardListener KBListener = new KeyBoardListener(held);
         addKeyListener(KBListener);
     }
     
@@ -65,17 +69,53 @@ public class Doolhof extends JPanel {
         Veld[][] velden = new Veld[doolhof.length][doolhof.length];
         for (int y = 0; y < doolhof.length; y++) {
             for (int x = 0; x < doolhof[y].length; x++) {
-                int xCord = x * 30 + 100;
-                int yCord = y * 30 + 100;
-                Veld veld = new Veld();
-                add(veld);
-                veld.setSize(new Dimension(30, 30));
-                veld.setLocation(xCord, yCord);
+                Veld veld = addVeld(x, y);
+                addSpelItem(veld, doolhof[y][x]);
                 velden[y][x] = veld;
             }
         }
-        
         voegBurenToe(velden);
+    }
+    
+    private Veld addVeld (int x, int y) {
+        int xCord = x * 30 + 100;
+        int yCord = y * 30 + 100;
+        Veld veld = new Veld();
+        add(veld);
+        veld.setSize(30, 30);
+        veld.setLocation(xCord, yCord);
+        return veld;
+    }
+    
+    private void addSpelItem (Veld veld, int item) {
+        if (item == 0) {
+            veld.setSpelItem(null);
+        }
+        else if (item == 1) {
+            Muur muur = new Muur();
+            veld.setSpelItem(muur);
+        }
+        else if (item == 2) {
+            Held held = new Held(this);
+            veld.setSpelItem(held);
+            startKeyBoardListener(held);
+        }
+        else if (item == 3) {
+            Vriend vriend = new Vriend();
+            veld.setSpelItem(vriend);
+        }
+        else if (item == 4) {
+            Cheater cheater = new Cheater();
+            veld.setSpelItem(cheater);
+        }
+        else if (item == 5) {
+            Helper helper = new Helper();
+            veld.setSpelItem(helper);
+        }
+        else if (item == 6) {
+            Bazooka bazooka = new Bazooka();
+            veld.setSpelItem(bazooka);
+        }
     }
     
     private void voegBurenToe (Veld[][] velden) {

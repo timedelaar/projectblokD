@@ -4,6 +4,7 @@
  */
 package projectblokd;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.HashMap;
 import javax.swing.JComponent;
@@ -43,6 +44,15 @@ public class Veld extends JComponent {
     
     @Override
     public void paintComponent (Graphics g) {
+        if (spelItem == null) {
+            g.setColor(Color.white);
+        }
+        else if (spelItem instanceof Muur) {
+            g.setColor(Color.black);
+        }
+        else if (spelItem instanceof Held) {
+            g.setColor(Color.red);
+        }
         g.fillRect(0, 0, 30, 30);
     }
 }
