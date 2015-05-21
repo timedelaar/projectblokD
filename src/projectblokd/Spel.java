@@ -15,8 +15,12 @@ import javax.swing.JPanel;
 public class Spel extends JPanel {
     
     private Doolhof doolhof;
+    private int width;
+    private int height;
     
-    public Spel () {
+    public Spel (int width, int height) {
+        this.width = width;
+        this.height = height;
         init();
     }
     
@@ -25,8 +29,9 @@ public class Spel extends JPanel {
         layout.setVgap(0);
         layout.setHgap(0);
         setLayout(layout);
-        doolhof = new Doolhof();
-        doolhof.setPreferredSize(new Dimension(600, 600));
+        doolhof = new Doolhof(width, height);
+        System.out.println(getWidth());
+        doolhof.setPreferredSize(new Dimension(width, height));
         add(doolhof);
     }
 }
