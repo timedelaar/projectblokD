@@ -29,7 +29,7 @@ public class MainFrame extends JFrame {
     }
     
     private void addSpel () {
-        Spel spel = new Spel();
+        Spel spel = new Spel(SPEL_WIDTH, SPEL_HEIGHT);
         spel.setSize(SPEL_WIDTH, SPEL_HEIGHT);
         
         JPanel panel = new JPanel();

@@ -28,8 +28,13 @@ public class Doolhof extends JPanel {
                                {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
                                {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
                                {1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
+    private int width;
+    private int height;
+    private int VELD_SIZE;
     
-    public Doolhof () {
+    public Doolhof (int width, int height) {
+        this.width = width;
+        this.height = height;
         init();
         startScoreTimer();
         maakDoolhof();
@@ -37,6 +42,7 @@ public class Doolhof extends JPanel {
     
     private void init () {
         setLayout(null);
+        VELD_SIZE = width / doolhof.length;
     }
     
     private void startScoreTimer () {
@@ -78,11 +84,11 @@ public class Doolhof extends JPanel {
     }
     
     private Veld addVeld (int x, int y) {
-        int xCord = x * 30 + 100;
-        int yCord = y * 30 + 100;
+        int xCord = x * VELD_SIZE;
+        int yCord = y * VELD_SIZE;
         Veld veld = new Veld();
         add(veld);
-        veld.setSize(30, 30);
+        veld.setSize(VELD_SIZE, VELD_SIZE);
         veld.setLocation(xCord, yCord);
         return veld;
     }
