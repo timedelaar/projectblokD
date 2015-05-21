@@ -6,6 +6,9 @@ package projectblokd;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.image.BufferedImage;
+import java.net.URL;
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 /**
@@ -37,5 +40,17 @@ public class Spel extends JPanel {
     
     public void stopSpel () {
         System.out.println("gewonnen");
+    }
+    
+    public static BufferedImage loadImage (String ref) {
+        BufferedImage image = null;
+        try {
+            URL url = Spel.class.getClassLoader().getResource("images/" + ref);
+            image = ImageIO.read(url);
+        }
+        catch (Exception e) {
+            System.out.println(e);
+        }
+        return image;
     }
 }

@@ -11,6 +11,10 @@ package projectblokd;
 public class Bazooka extends PowerUp {
     
     private Held held;
+    
+    public Bazooka () {
+        setImage(Spel.loadImage("bazooka.png"));
+    }
 
     public void schiet (Richtingen richting) {
         throw new UnsupportedOperationException("Not supported yet");

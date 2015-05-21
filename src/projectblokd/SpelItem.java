@@ -17,17 +17,8 @@ public abstract class SpelItem {
     private BufferedImage image;
     private Veld veld;
     
-    public boolean loadImage (String ref) {
-        try {
-            URL url = this.getClass().getClassLoader().getResource("images/" + ref);
-            image = ImageIO.read(url);
-        }
-        catch (Exception e) {
-            image = null;
-            System.out.println(e);
-            return false;
-        }
-        return true;
+    public void setImage (BufferedImage image) {
+        this.image = image;
     }
     
     public BufferedImage getImage () {

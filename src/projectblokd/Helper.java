@@ -10,6 +10,10 @@ package projectblokd;
  */
 public class Helper extends PowerUp {
 
+    public Helper () {
+        setImage(Spel.loadImage("helper.png"));
+    }
+    
     @Override
     public void actie () {
         System.out.println("Toon snelste route");

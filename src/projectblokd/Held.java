@@ -20,7 +20,7 @@ public class Held extends SpelItem {
     public Held (Doolhof doolhof) {
         this.doolhof = doolhof;
         
-        loadImage("rocket.png");
+        setImage(Spel.loadImage("held.png"));
     }
     
     public void verplaats (Richtingen richting) {
