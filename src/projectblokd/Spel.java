@@ -30,7 +30,6 @@ public class Spel extends JPanel {
         layout.setHgap(0);
         setLayout(layout);
         doolhof = new Doolhof(width, height);
-        System.out.println(getWidth());
         doolhof.setPreferredSize(new Dimension(width, height));
         add(doolhof);
     }

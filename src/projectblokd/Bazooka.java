@@ -9,10 +9,19 @@ package projectblokd;
  * @author Tim
  */
 public class Bazooka extends PowerUp {
+    
+    private Held held;
 
-    @Override
-    public void actie () {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void schiet (Richtingen richting) {
+        throw new UnsupportedOperationException("Not supported yet");
     }
     
+    @Override
+    public void actie () {
+        held.addBazooka(this);
+    }
+    
+    public void setHeld (Held held) {
+        this.held = held;
+    }
 }

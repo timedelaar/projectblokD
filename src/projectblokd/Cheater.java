@@ -9,6 +9,12 @@ package projectblokd;
  * @author Tim
  */
 public class Cheater extends PowerUp {
+    
+    private int waarde;
+    
+    public Cheater (int waarde) {
+        this.waarde = waarde;
+    }
 
     @Override
     public void actie () {

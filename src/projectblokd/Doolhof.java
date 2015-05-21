@@ -19,12 +19,12 @@ public class Doolhof extends JPanel {
     private int minuten;
     private int secondes;
     private int[][] doolhof = {{1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-                               {1, 2, 0, 0, 0, 0, 0, 0, 0, 1},
+                               {1, 6, 0, 0, 0, 0, 0, 0, 0, 1},
                                {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
                                {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
                                {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
                                {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-                               {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+                               {1, 0, 0, 0, 0, 0, 0, 2, 0, 1},
                                {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
                                {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
                                {1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
@@ -108,7 +108,7 @@ public class Doolhof extends JPanel {
             veld.setSpelItem(vriend);
         }
         else if (item == 4) {
-            Cheater cheater = new Cheater();
+            Cheater cheater = new Cheater(10);
             veld.setSpelItem(cheater);
         }
         else if (item == 5) {

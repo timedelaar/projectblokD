@@ -23,8 +23,6 @@ public class Held extends SpelItem {
         loadImage("rocket.png");
     }
     
-    
-    
     public void verplaats (Richtingen richting) {
         Veld veld = getVeld();
         Veld nieuwVeld = veld.getNeighbour(richting);
@@ -43,8 +41,16 @@ public class Held extends SpelItem {
         }
         else if (item instanceof PowerUp) {
             PowerUp powerUp = (PowerUp) item;
+            if (powerUp instanceof Bazooka) {
+                Bazooka b = (Bazooka) powerUp;
+                b.setHeld(this);
+            }
             powerUp.actie();
         }
         return true;
+    }
+    
+    public void addBazooka (Bazooka bazooka) {
+        this.bazooka = bazooka;
     }
 }
