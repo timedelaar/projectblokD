@@ -5,6 +5,7 @@
 package projectblokd;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JLabel;
@@ -17,10 +18,14 @@ import javax.swing.JPanel;
  */
 public class Doolhof extends JPanel {
     
+    private int width;
+    private int height;
+    private int VELD_SIZE;
+    
     Timer timer;
-    JLabel score;
-    private int minuten;
-    private int secondes;
+    JLabel scoreLabel;
+    private int score;
+    
     /* 1 = muur
      * 2 = held
      * 3 = vriend
@@ -28,19 +33,18 @@ public class Doolhof extends JPanel {
      * 5 = helper
      * 6 = bazooka
      */
-    private int[][] doolhof = {{1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-                               {1, 2, 1, 0, 5, 0, 0, 0, 0, 1},
-                               {1, 0, 1, 0, 1, 0, 1, 1, 0, 1},
-                               {1, 0, 1, 0, 1, 0, 1, 6, 0, 1},
-                               {1, 0, 1, 0, 0, 0, 1, 0, 1, 1},
-                               {1, 0, 1, 0, 1, 0, 1, 0, 1, 1},
-                               {1, 0, 0, 0, 1, 0, 0, 0, 0, 1},
-                               {1, 0, 1, 1, 1, 0, 1, 0, 1, 1},
-                               {1, 0, 4, 1, 0, 0, 1, 0, 3, 1},
-                               {1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
-    private int width;
-    private int height;
-    private int VELD_SIZE;
+    private int[][] doolhofLayout = {{1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+                                     {1, 2, 1, 0, 5, 0, 0, 0, 0, 1},
+                                     {1, 0, 1, 0, 1, 0, 1, 1, 0, 1},
+                                     {1, 0, 1, 0, 1, 0, 1, 6, 0, 1},
+                                     {1, 0, 1, 0, 0, 0, 1, 0, 1, 1},
+                                     {1, 0, 1, 0, 1, 0, 1, 0, 1, 1},
+                                     {1, 0, 0, 0, 1, 0, 0, 0, 0, 1},
+                                     {1, 0, 1, 1, 1, 0, 1, 0, 1, 1},
+                                     {1, 0, 4, 1, 0, 0, 1, 0, 3, 1},
+                                     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
+    
+    private final int CHEATER_WAARDE = 10;
     
     public Doolhof (int width, int height) {
         this.width = width;
@@ -53,15 +57,19 @@ public class Doolhof extends JPanel {
     
     private void init () {
         setLayout(null);
-        VELD_SIZE = width / doolhof.length;
+        VELD_SIZE = width / doolhofLayout.length;
     }
     
     private void maakScoreBoard () {
-        score = new JLabel("tijd:");
-        score.setForeground(Color.white);
-        add(score);
-        score.setLocation(10, 0);
-        score.setSize(100, 25);
+        scoreLabel = new JLabel("tijd: 00:00");
+        scoreLabel.setForeground(Color.white);
+        scoreLabel.setBackground(Color.black);
+        scoreLabel.setOpaque(true);
+        add(scoreLabel);
+        scoreLabel.setLocation(10, 10);
+        scoreLabel.setSize(100, 25);
+        Font scoreFont = scoreLabel.getFont();
+        scoreLabel.setFont(new Font(scoreFont.getFontName(), Font.PLAIN, 20));
     }
     
     private void startScoreTimer () {
@@ -74,19 +82,26 @@ public class Doolhof extends JPanel {
             }
             
             private void verhoogScore () {
-                secondes ++;
-                if (secondes == 60) {
-                    minuten ++;
-                    secondes = 0;
-                }
+                score ++;
             }
             
             private void updateScore () {
-                score.setText("tijd: " + minuten + ":" + secondes);
+                int minuten = score / 60;
+                int secondes = score % 60;
+                scoreLabel.setText("tijd: " + String.format("%02d", minuten) + ":" + String.format("%02d", secondes));
             }
             
         });
         timer.start();
+    }
+    
+    public void verlaagScore (int waarde) {
+        if (score >= waarde) {
+            score -= waarde;
+        }
+        else {
+            score = 0;
+        }
     }
     
     private void startKeyBoardListener (Held held) {
@@ -96,11 +111,11 @@ public class Doolhof extends JPanel {
     }
     
     private void maakDoolhof () {
-        Veld[][] velden = new Veld[doolhof.length][doolhof.length];
-        for (int y = 0; y < doolhof.length; y++) {
-            for (int x = 0; x < doolhof[y].length; x++) {
+        Veld[][] velden = new Veld[doolhofLayout.length][doolhofLayout.length];
+        for (int y = 0; y < doolhofLayout.length; y++) {
+            for (int x = 0; x < doolhofLayout[y].length; x++) {
                 Veld veld = addVeld(x, y);
-                addSpelItem(veld, doolhof[y][x]);
+                addSpelItem(veld, doolhofLayout[y][x]);
                 velden[y][x] = veld;
             }
         }
@@ -132,7 +147,7 @@ public class Doolhof extends JPanel {
             veld.setSpelItem(vriend);
         }
         else if (item == 4) {
-            Cheater cheater = new Cheater(10);
+            Cheater cheater = new Cheater(CHEATER_WAARDE, this);
             veld.setSpelItem(cheater);
         }
         else if (item == 5) {

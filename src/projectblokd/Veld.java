@@ -55,8 +55,10 @@ public class Veld extends JComponent {
             g.setColor(Color.red);
         }
         g.fillRect(0, 0, getWidth(), getHeight());
-        if (spelItem instanceof Held) {
-            g.drawImage(spelItem.getImage(), 0, 0, this);
+        if (spelItem != null) {
+            if (spelItem.getImage() != null) {
+                g.drawImage(spelItem.getImage(), 0, 0, getWidth(), getHeight(), this);
+            }
         }
     }
 }

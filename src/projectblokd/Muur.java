@@ -10,4 +10,7 @@ package projectblokd;
  */
 public class Muur extends SpelItem {
     
+    public Muur () {
+        loadImage("muur.png");
+    }
 }

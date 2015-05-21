@@ -12,7 +12,7 @@ public class Helper extends PowerUp {
 
     @Override
     public void actie () {
-        throw new UnsupportedOperationException("Not supported yet.");
+        System.out.println("Toon snelste route");
     }
     
 }
