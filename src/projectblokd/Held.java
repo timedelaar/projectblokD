@@ -24,19 +24,22 @@ public class Held extends SpelItem {
     }
     
     public void verplaats (Richtingen richting) {
-        Veld veld = getVeld();
-        Veld nieuwVeld = veld.getNeighbour(richting);
+        Veld huidigVeld = getVeld();
+        Veld nieuwVeld = huidigVeld.getNeighbour(richting);
         if (checkVeld(nieuwVeld)) {
             nieuwVeld.setSpelItem(this);
-            veld.verwijderSpelItem();
+            huidigVeld.verwijderSpelItem();
             nieuwVeld.repaint();
-            veld.repaint();
+            huidigVeld.repaint();
         }
     }
     
     public boolean checkVeld (Veld veld) {
         SpelItem item = veld.getSpelItem();
-        if (item instanceof Muur) {
+        if (item == null) {
+            return true;
+        }
+        else if (item instanceof Muur) {
             return false;
         }
         else if (item instanceof PowerUp) {
