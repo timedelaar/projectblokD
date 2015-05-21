@@ -10,9 +10,13 @@ package projectblokd;
  */
 public class Helper extends PowerUp {
 
+    public Helper () {
+        setImage(Spel.loadImage("helper.png"));
+    }
+    
     @Override
     public void actie () {
-        throw new UnsupportedOperationException("Not supported yet.");
+        System.out.println("Toon snelste route");
     }
     
 }

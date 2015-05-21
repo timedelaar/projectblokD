@@ -6,6 +6,9 @@ package projectblokd;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.image.BufferedImage;
+import java.net.URL;
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 /**
@@ -13,6 +16,7 @@ import javax.swing.JPanel;
  * @author Tim
  */
 public class Spel extends JPanel {
+    
     
     private Doolhof doolhof;
     private int width;
@@ -30,8 +34,23 @@ public class Spel extends JPanel {
         layout.setHgap(0);
         setLayout(layout);
         doolhof = new Doolhof(width, height);
-        System.out.println(getWidth());
         doolhof.setPreferredSize(new Dimension(width, height));
         add(doolhof);
+    }
+    
+    public void stopSpel () {
+        System.out.println("gewonnen");
+    }
+    
+    public static BufferedImage loadImage (String ref) {
+        BufferedImage image = null;
+        try {
+            URL url = Spel.class.getClassLoader().getResource("images/" + ref);
+            image = ImageIO.read(url);
+        }
+        catch (Exception e) {
+            System.out.println(e);
+        }
+        return image;
     }
 }

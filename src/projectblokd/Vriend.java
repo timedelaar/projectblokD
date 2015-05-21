@@ -10,4 +10,8 @@ package projectblokd;
  */
 public class Vriend extends SpelItem {
     
+    public Vriend () {
+        setImage(Spel.loadImage("vriend.png"));
+    }
+    
 }

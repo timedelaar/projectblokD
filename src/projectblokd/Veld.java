@@ -6,6 +6,7 @@ package projectblokd;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import javax.swing.JComponent;
 
@@ -17,9 +18,15 @@ public class Veld extends JComponent {
     
     private HashMap<Richtingen, Veld> buren;
     private SpelItem spelItem;
+    private BufferedImage image;
     
     public Veld () {
         buren = new HashMap<>();
+        setImage(Spel.loadImage("veld.png"));
+    }
+    
+    public final void setImage (BufferedImage image) {
+        this.image = image;
     }
     
     public void setNeighbour (Richtingen richting, Veld veld) {
@@ -45,18 +52,11 @@ public class Veld extends JComponent {
     
     @Override
     public void paintComponent (Graphics g) {
-        if (spelItem == null) {
-            g.setColor(Color.white);
-        }
-        else if (spelItem instanceof Muur) {
-            g.setColor(Color.black);
-        }
-        else if (spelItem instanceof Held) {
-            g.setColor(Color.red);
-        }
-        g.fillRect(0, 0, getWidth(), getHeight());
-        if (spelItem instanceof Held) {
-            g.drawImage(spelItem.getImage(), 0, 0, this);
+        g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
+        if (spelItem != null) {
+            if (spelItem.getImage() != null) {
+                g.drawImage(spelItem.getImage(), 0, 0, getWidth(), getHeight(), this);
+            }
         }
     }
 }
