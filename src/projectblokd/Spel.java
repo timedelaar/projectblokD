@@ -14,6 +14,7 @@ import javax.swing.JPanel;
  */
 public class Spel extends JPanel {
     
+    
     private Doolhof doolhof;
     private int width;
     private int height;
@@ -32,5 +33,10 @@ public class Spel extends JPanel {
         doolhof = new Doolhof(width, height);
         doolhof.setPreferredSize(new Dimension(width, height));
         add(doolhof);
+    }
+    
+    public void stopSpel () {
+        System.out.println("gewonnen");
+        doolhof.setVisible(false);
     }
 }

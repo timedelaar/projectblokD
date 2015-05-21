@@ -178,4 +178,9 @@ public class Doolhof extends JPanel {
             }
         }
     }
+    
+    private void stopSpel () {
+        Spel spel = (Spel) getParent();
+        spel.stopSpel();
+    }
 }
