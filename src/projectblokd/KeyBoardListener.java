@@ -28,15 +28,19 @@ public class KeyBoardListener implements KeyListener {
         int code = e.getKeyCode();
         if (code == 37) {
             System.out.println("links");
+            held.verplaats(Richtingen.WEST);
         }
         else if (code == 38) {
             System.out.println("boven");
+            held.verplaats(Richtingen.NORTH);
         }
         else if (code == 39) {
             System.out.println("rechts");
+            held.verplaats(Richtingen.EAST);
         }
         else if (code == 40) {
             System.out.println("onder");
+            held.verplaats(Richtingen.SOUTH);
         }
         else if (code == 32) {
             System.out.println("spatie");

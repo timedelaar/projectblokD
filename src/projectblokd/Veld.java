@@ -32,6 +32,7 @@ public class Veld extends JComponent {
     
     public void setSpelItem (SpelItem spelItem) {
         this.spelItem = spelItem;
+        spelItem.setVeld(this);
     }
     
     public SpelItem getSpelItem () {
@@ -54,5 +55,8 @@ public class Veld extends JComponent {
             g.setColor(Color.red);
         }
         g.fillRect(0, 0, 30, 30);
+        if (spelItem instanceof Held) {
+            g.drawImage(spelItem.getImage(), 0, 0, this);
+        }
     }
 }

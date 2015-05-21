@@ -10,4 +10,6 @@ package projectblokd;
  */
 public abstract class PowerUp extends SpelItem {
     
+    public abstract void actie ();
+    
 }

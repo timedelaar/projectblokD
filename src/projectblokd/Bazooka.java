@@ -9,5 +9,10 @@ package projectblokd;
  * @author Tim
  */
 public class Bazooka extends PowerUp {
+
+    @Override
+    public void actie () {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
     
 }

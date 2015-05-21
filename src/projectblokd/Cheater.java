@@ -9,5 +9,10 @@ package projectblokd;
  * @author Tim
  */
 public class Cheater extends PowerUp {
+
+    @Override
+    public void actie () {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
     
 }

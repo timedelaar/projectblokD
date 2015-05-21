@@ -4,10 +4,6 @@
  */
 package projectblokd;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.net.URL;
-import javax.imageio.ImageIO;
 
 /**
  *
@@ -15,19 +11,40 @@ import javax.imageio.ImageIO;
  */
 public class Held extends SpelItem {
     
-    private BufferedImage image;
     private Doolhof doolhof;
+    
+    private Bazooka bazooka;
+    
+    private Richtingen laatsteRichting;
     
     public Held (Doolhof doolhof) {
         this.doolhof = doolhof;
         
-        try {
-            URL url = this.getClass().getClassLoader().getResource("images/rocket.png");
-            image = ImageIO.read(url);
+        loadImage("rocket.png");
+    }
+    
+    
+    
+    public void verplaats (Richtingen richting) {
+        Veld veld = getVeld();
+        Veld nieuwVeld = veld.getNeighbour(richting);
+        if (checkVeld(nieuwVeld)) {
+            nieuwVeld.setSpelItem(this);
+            veld.verwijderSpelItem();
+            nieuwVeld.repaint();
+            veld.repaint();
         }
-        catch (Exception e) {
-            image = null;
-            System.out.println(e);
+    }
+    
+    public boolean checkVeld (Veld veld) {
+        SpelItem item = veld.getSpelItem();
+        if (item instanceof Muur) {
+            return false;
         }
+        else if (item instanceof PowerUp) {
+            PowerUp powerUp = (PowerUp) item;
+            powerUp.actie();
+        }
+        return true;
     }
 }

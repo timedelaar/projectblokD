@@ -4,10 +4,41 @@
  */
 package projectblokd;
 
+import java.awt.image.BufferedImage;
+import java.net.URL;
+import javax.imageio.ImageIO;
+
 /**
  *
  * @author Tim
  */
 public abstract class SpelItem {
     
+    private BufferedImage image;
+    private Veld veld;
+    
+    public boolean loadImage (String ref) {
+        try {
+            URL url = this.getClass().getClassLoader().getResource("images/" + ref);
+            image = ImageIO.read(url);
+        }
+        catch (Exception e) {
+            image = null;
+            System.out.println(e);
+            return false;
+        }
+        return true;
+    }
+    
+    public BufferedImage getImage () {
+        return image;
+    }
+    
+    public void setVeld (Veld veld) {
+        this.veld = veld;
+    }
+    
+    public Veld getVeld () {
+        return veld;
+    }
 }

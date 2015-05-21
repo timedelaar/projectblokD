@@ -88,10 +88,7 @@ public class Doolhof extends JPanel {
     }
     
     private void addSpelItem (Veld veld, int item) {
-        if (item == 0) {
-            veld.setSpelItem(null);
-        }
-        else if (item == 1) {
+        if (item == 1) {
             Muur muur = new Muur();
             veld.setSpelItem(muur);
         }
