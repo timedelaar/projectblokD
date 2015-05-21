@@ -47,6 +47,9 @@ public class Held extends SpelItem {
             }
             powerUp.actie();
         }
+        else if (item instanceof Vriend) {
+            doolhof.stopSpel();
+        }
         return true;
     }
     

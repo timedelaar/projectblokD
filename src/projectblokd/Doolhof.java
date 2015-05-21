@@ -89,6 +89,7 @@ public class Doolhof extends JPanel {
                 int minuten = score / 60;
                 int secondes = score % 60;
                 scoreLabel.setText("tijd: " + String.format("%02d", minuten) + ":" + String.format("%02d", secondes));
+                System.out.println("s+");
             }
             
         });
@@ -179,7 +180,7 @@ public class Doolhof extends JPanel {
         }
     }
     
-    private void stopSpel () {
+    public void stopSpel () {
         Spel spel = (Spel) getParent();
         spel.stopSpel();
     }

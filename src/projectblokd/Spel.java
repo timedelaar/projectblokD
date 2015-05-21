@@ -37,6 +37,5 @@ public class Spel extends JPanel {
     
     public void stopSpel () {
         System.out.println("gewonnen");
-        doolhof.setVisible(false);
     }
 }
