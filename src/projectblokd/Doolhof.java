@@ -4,8 +4,10 @@
  */
 package projectblokd;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JLabel;
 import javax.swing.Timer;
 import javax.swing.JPanel;
 
@@ -16,6 +18,7 @@ import javax.swing.JPanel;
 public class Doolhof extends JPanel {
     
     Timer timer;
+    JLabel score;
     private int minuten;
     private int secondes;
     /* 1 = muur
@@ -43,6 +46,7 @@ public class Doolhof extends JPanel {
         this.width = width;
         this.height = height;
         init();
+        maakScoreBoard();
         startScoreTimer();
         maakDoolhof();
     }
@@ -52,12 +56,21 @@ public class Doolhof extends JPanel {
         VELD_SIZE = width / doolhof.length;
     }
     
+    private void maakScoreBoard () {
+        score = new JLabel("tijd:");
+        score.setForeground(Color.white);
+        add(score);
+        score.setLocation(10, 0);
+        score.setSize(100, 25);
+    }
+    
     private void startScoreTimer () {
         timer = new Timer(1000, new ActionListener(){
 
             @Override
             public void actionPerformed (ActionEvent e) {
                 verhoogScore();
+                updateScore();
             }
             
             private void verhoogScore () {
@@ -66,6 +79,10 @@ public class Doolhof extends JPanel {
                     minuten ++;
                     secondes = 0;
                 }
+            }
+            
+            private void updateScore () {
+                score.setText("tijd: " + minuten + ":" + secondes);
             }
             
         });
