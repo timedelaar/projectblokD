@@ -13,11 +13,9 @@ import javax.swing.Timer;
 public class Kogel {
     
     private Veld huidigVeld;
-    //private Timer timer;                          timer adden voor kogel verplaatsen
-    
+/*
     public Kogel(Veld veld) {
-        //setImage(Spel.loadImage("cheater.png"));  
-        huidigVeld = veld;
+        setImage(Spel.loadImage("cheater.png"));                    //veldmethod
     }
 
     public void verplaats(Richtingen richting) {              
