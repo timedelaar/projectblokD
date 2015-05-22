@@ -9,8 +9,10 @@ package projectblokd;
  * @author Tim
  */
 public class Kogel {
+    
+    private Veld huidigVeld;
 /*
-    public Kogel(Doolhof doolhof) {
+    public Kogel(Veld veld) {
         setImage(Spel.loadImage("cheater.png"));                    //veldmethod
     }
 
