@@ -192,5 +192,6 @@ public class Doolhof extends JPanel {
     public void stopSpel () {
         Spel spel = (Spel) getParent();
         spel.stopSpel();
+        timer.stop();
     }
 }

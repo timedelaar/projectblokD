@@ -9,5 +9,29 @@ package projectblokd;
  * @author Tim
  */
 public class Kogel {
-    
+/*
+    public Kogel(Doolhof doolhof) {
+        setImage(Spel.loadImage("cheater.png"));                    //veldmethod
+    }
+
+    public void verplaats(Richtingen richting) {
+        Veld huidigVeld = getVeld();                                //veldmethod
+        Veld nieuwVeld = huidigVeld.getNeighbour(richting);
+        while (checkHit(nieuwVeld) == false) {
+            nieuwVeld.setSpelItem(this);
+            huidigVeld.verwijderSpelItem();
+            nieuwVeld.repaint();
+            huidigVeld.repaint();
+        }
+    }
+
+    public boolean checkHit(Veld veld) {
+        SpelItem item = veld.getSpelItem();
+        if (item instanceof Muur) {
+            return true;
+        }
+        else
+            return false;
+    }
+*/
 }
