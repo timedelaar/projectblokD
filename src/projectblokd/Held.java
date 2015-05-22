@@ -22,8 +22,12 @@ public class Held extends SpelItem {
         
         setImage(Spel.loadImage("held.png"));
     }
-    
+    public void schiet (){
+        Bazooka b = new Bazooka();
+        b.schiet(laatsteRichting);
+    }
     public void verplaats (Richtingen richting) {
+        laatsteRichting = richting;
         Veld huidigVeld = getVeld();
         Veld nieuwVeld = huidigVeld.getNeighbour(richting);
         if (checkVeld(nieuwVeld)) {

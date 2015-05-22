@@ -19,6 +19,7 @@ public class Veld extends JComponent {
     private HashMap<Richtingen, Veld> buren;
     private SpelItem spelItem;
     private BufferedImage image;
+    private Kogel kogel;
     
     public Veld () {
         buren = new HashMap<>();
@@ -48,6 +49,13 @@ public class Veld extends JComponent {
     
     public void verwijderSpelItem () {
         spelItem = null;
+    }
+    public void verwijderKogel(){
+        kogel = null;
+    }
+    public void setKogel(Kogel kogel)
+    {
+        this.kogel = kogel;
     }
     
     @Override

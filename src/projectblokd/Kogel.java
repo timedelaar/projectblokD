@@ -4,22 +4,27 @@
  */
 package projectblokd;
 
+import javax.swing.Timer;
+
 /**
  *
  * @author Tim
  */
 public class Kogel {
-/*
-    public Kogel(Doolhof doolhof) {
-        setImage(Spel.loadImage("cheater.png"));                    //veldmethod
+    
+    private Veld huidigVeld;
+    //private Timer timer;                          timer adden voor kogel verplaatsen
+    
+    public Kogel(Veld veld) {
+        //setImage(Spel.loadImage("cheater.png"));  
+        huidigVeld = veld;
     }
 
-    public void verplaats(Richtingen richting) {
-        Veld huidigVeld = getVeld();                                //veldmethod
+    public void verplaats(Richtingen richting) {              
         Veld nieuwVeld = huidigVeld.getNeighbour(richting);
-        while (checkHit(nieuwVeld) == false) {
-            nieuwVeld.setSpelItem(this);
-            huidigVeld.verwijderSpelItem();
+        if (checkHit(nieuwVeld) == false) {
+            nieuwVeld.setKogel(this);
+            huidigVeld.verwijderKogel();
             nieuwVeld.repaint();
             huidigVeld.repaint();
         }
@@ -33,5 +38,4 @@ public class Kogel {
         else
             return false;
     }
-*/
 }
