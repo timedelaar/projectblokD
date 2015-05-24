@@ -66,5 +66,10 @@ public class Veld extends JComponent {
                 g.drawImage(spelItem.getImage(), 0, 0, getWidth(), getHeight(), this);
             }
         }
+        if (kogel != null) {
+            if (kogel.getImage() != null) {
+                g.drawImage(kogel.getImage(), 0, 0, getWidth(), getHeight(), this);
+            }
+        }
     }
 }

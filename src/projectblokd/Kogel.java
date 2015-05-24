@@ -4,6 +4,9 @@
  */
 package projectblokd;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import javax.swing.Timer;
 
 /**
@@ -13,28 +16,65 @@ import javax.swing.Timer;
 public class Kogel {
     
     private Veld huidigVeld;
-    //private Timer timer;
+    private Timer timer;
+    private BufferedImage image;
+    private Richtingen richting;
 
-    public Kogel(Veld veld) {
-        //setImage(Spel.loadImage("cheater.png"));                    
+    public Kogel(Veld veld, Richtingen richting) {
+        image = Spel.loadImage("cheater.png");
+        this.richting = richting;
+        huidigVeld = veld;
+        veld.setKogel(this);
+        startTimer();
+    }
+    
+    private void startTimer () {
+        timer = new Timer(200, new ActionListener(){
+
+            @Override
+            public void actionPerformed (ActionEvent e) {
+                verplaats();
+            }
+            
+        });
+        timer.start();
     }
 
-    public void verplaats(Richtingen richting) {              
+    private void verplaats() {              
         Veld nieuwVeld = huidigVeld.getNeighbour(richting);
-        if (checkHit(nieuwVeld) == false) {
-            nieuwVeld.setKogel(this);
+        if (nieuwVeld != null) {
+            if (checkHit(nieuwVeld) == false) {
+                nieuwVeld.setKogel(this);
+                huidigVeld.verwijderKogel();
+                nieuwVeld.repaint();
+                huidigVeld.repaint();
+                huidigVeld = nieuwVeld;
+            }
+            else {
+                huidigVeld.verwijderKogel();
+                nieuwVeld.verwijderSpelItem();
+                nieuwVeld.repaint();
+                huidigVeld.repaint();
+                timer.stop();
+            }
+        }
+        else {
             huidigVeld.verwijderKogel();
-            nieuwVeld.repaint();
             huidigVeld.repaint();
+            timer.stop();
         }
     }
 
-    public boolean checkHit(Veld veld) {
+    private boolean checkHit(Veld veld) {
         SpelItem item = veld.getSpelItem();
         if (item instanceof Muur) {
             return true;
         }
         else
             return false;
+    }
+    
+    public BufferedImage getImage () {
+        return image;
     }
 }

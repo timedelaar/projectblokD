@@ -39,7 +39,7 @@ public class KeyBoardListener implements KeyListener {
             held.verplaats(Richtingen.SOUTH);
         }
         else if (code == 32) {
-            System.out.println("spatie");
+            held.schiet();
         }
     }
 

@@ -22,12 +22,16 @@ public class Held extends SpelItem {
         
         setImage(Spel.loadImage("held.png"));
     }
+    
     public void schiet (){
-        Bazooka b = new Bazooka();
-        b.schiet(laatsteRichting);
+        if (bazooka != null) {
+            bazooka.schiet(laatsteRichting);
+            bazooka = null;
+        }
     }
+    
     public void verplaats (Richtingen richting) {
-        laatsteRichting = richting;
+        laatsteRichting = richting; //Vernieuwt ook als poppetje niet verplaatst wordt, is dit gewild?
         Veld huidigVeld = getVeld();
         Veld nieuwVeld = huidigVeld.getNeighbour(richting);
         if (checkVeld(nieuwVeld)) {
@@ -35,6 +39,9 @@ public class Held extends SpelItem {
             huidigVeld.verwijderSpelItem();
             nieuwVeld.repaint();
             huidigVeld.repaint();
+            if (bazooka != null) {
+                bazooka.setVeld(nieuwVeld);
+            }
         }
     }
     
