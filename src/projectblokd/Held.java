@@ -31,7 +31,7 @@ public class Held extends SpelItem {
     }
     
     public void verplaats (Richtingen richting) {
-        laatsteRichting = richting; //Vernieuwt ook als poppetje niet verplaatst wordt, is dit gewild?
+        laatsteRichting = richting;
         Veld huidigVeld = getVeld();
         Veld nieuwVeld = huidigVeld.getNeighbour(richting);
         if (checkVeld(nieuwVeld)) {
