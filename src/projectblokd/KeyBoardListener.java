@@ -4,14 +4,14 @@
  */
 package projectblokd;
 
+import java.awt.KeyEventDispatcher;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 /**
  *
  * @author Tim
  */
-public class KeyBoardListener implements KeyListener {
+public class KeyBoardListener implements KeyEventDispatcher {
     
     Held held;
     
@@ -20,31 +20,25 @@ public class KeyBoardListener implements KeyListener {
     }
 
     @Override
-    public void keyTyped (KeyEvent e) {
-    }
-
-    @Override
-    public void keyPressed (KeyEvent e) {
-        int code = e.getKeyCode();
-        if (code == 37) {
-            held.verplaats(Richtingen.WEST);
+    public boolean dispatchKeyEvent (KeyEvent e) {
+        if (e.getID() == KeyEvent.KEY_PRESSED) {
+            if (e.getKeyCode() == 37) {
+                held.verplaats(Richtingen.WEST);
+            }
+            else if (e.getKeyCode() == 38) {
+                held.verplaats(Richtingen.NORTH);
+            }
+            else if (e.getKeyCode() == 39) {
+                held.verplaats(Richtingen.EAST);
+            }
+            else if (e.getKeyCode() == 40) {
+                held.verplaats(Richtingen.SOUTH);
+            }
+            else if (e.getKeyCode() == 32) {
+                held.schiet();
+            }
         }
-        else if (code == 38) {
-            held.verplaats(Richtingen.NORTH);
-        }
-        else if (code == 39) {
-            held.verplaats(Richtingen.EAST);
-        }
-        else if (code == 40) {
-            held.verplaats(Richtingen.SOUTH);
-        }
-        else if (code == 32) {
-            held.schiet();
-        }
-    }
-
-    @Override
-    public void keyReleased (KeyEvent e) {
+        return true;
     }
     
 }

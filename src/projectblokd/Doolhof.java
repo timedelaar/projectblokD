@@ -6,6 +6,7 @@ package projectblokd;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JLabel;
@@ -116,8 +117,9 @@ public class Doolhof extends JPanel {
     
     private void startKeyBoardListener (Held held) {
         setFocusable(true);
+        KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
         KeyBoardListener KBListener = new KeyBoardListener(held);
-        addKeyListener(KBListener);
+        manager.addKeyEventDispatcher(KBListener);
     }
     
     private void maakDoolhof () {
