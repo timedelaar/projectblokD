@@ -14,10 +14,20 @@ import javax.swing.JComponent;
  */
 public class Knop extends JComponent {
     
-    private BufferedImage image;
+    public static final int RESET = 0;
+    public static final int START = 1;
+    public static final int EXIT = 2;
     
-    public Knop (String ref) {
+    private BufferedImage image;
+    private int actie;
+    
+    public Knop (String ref, int actie) {
         image = Spel.loadImage(ref);
+        this.actie = actie;
+    }
+    
+    public int getActie () {
+        return actie;
     }
     
     public void paintComponent (Graphics g) {

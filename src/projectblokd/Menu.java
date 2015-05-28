@@ -21,6 +21,9 @@ public class Menu extends JPanel {
     private Knop exitKnop;
     private KnopListener exitListener;
     
+    private final int KNOP_WIDTH = 200;
+    private final int KNOP_HEIGHT = (int) (KNOP_WIDTH * 0.3125);
+    
     public Menu () {
         setLayout(null);
         background = Spel.loadImage("menu_bg.png");
@@ -29,30 +32,30 @@ public class Menu extends JPanel {
     }
     
     public final void maakStartKnop () {
-        startKnop = new Knop("held.png");
+        startKnop = new Knop("start-sign.png", Knop.START);
         add(startKnop);
-        startKnop.setSize(new Dimension(100, 40));
-        startKnop.setLocation(100, 100);
+        startKnop.setSize(new Dimension(KNOP_WIDTH, KNOP_HEIGHT));
+        startKnop.setLocation(200, 175);
         startListener = new KnopListener(this, startKnop);
         startKnop.addMouseListener(startListener);
     }
     
     public final void maakExitKnop () {
-        exitKnop = new Knop("vriend.png");
+        exitKnop = new Knop("exit-sign.png", Knop.EXIT);
         add(exitKnop);
-        exitKnop.setSize(new Dimension(100, 40));
-        exitKnop.setLocation(100, 200);
+        exitKnop.setSize(new Dimension(KNOP_WIDTH, KNOP_HEIGHT));
+        exitKnop.setLocation(200, 300);
         exitListener = new KnopListener(this, exitKnop);
         exitKnop.addMouseListener(exitListener);
     }
     
     public void actie (Knop knop) {
         Spel spel = (Spel) getParent();
-        if (knop.equals(startKnop)) {
+        if (knop.getActie() == Knop.START) {
             deleteKnoppen();
             spel.startSpel();
         }
-        else if (knop.equals(exitKnop)) {
+        else if (knop.getActie() == Knop.EXIT) {
             deleteKnoppen();
             spel.exit();
         }

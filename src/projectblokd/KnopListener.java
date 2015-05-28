@@ -15,15 +15,24 @@ public class KnopListener implements MouseListener {
     
     private Knop knop;
     private Menu menu;
+    private Doolhof doolhof;
     
     public KnopListener (Menu menu, Knop knop) {
         this.knop = knop;
         this.menu = menu;
     }
+    
+    public KnopListener (Doolhof doolhof, Knop knop) {
+        this.knop = knop;
+        this.doolhof = doolhof;
+    }
 
     @Override
     public void mouseClicked (MouseEvent e) {
-        menu.actie(knop);
+        if (menu != null)
+            menu.actie(knop);
+        else if (doolhof != null)
+            doolhof.opnieuwStarten();
     }
 
     @Override

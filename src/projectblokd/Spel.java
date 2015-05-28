@@ -6,6 +6,7 @@ package projectblokd;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.net.URL;
 import javax.imageio.ImageIO;
@@ -61,6 +62,10 @@ public class Spel extends JPanel {
         System.out.println("gewonnen");
     }
     
+    public void opnieuwStarten () {
+        System.out.println("reset doolhof");
+    }
+    
     public void exit () {
         
     }
@@ -75,5 +80,13 @@ public class Spel extends JPanel {
             System.out.println(e);
         }
         return image;
+    }
+    
+    public static BufferedImage resizeImage (BufferedImage image, int width, int height) {
+        BufferedImage resizedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2 = resizedImage.createGraphics();
+        g2.drawImage(image, 0, 0, width, height, null);
+        g2.dispose();
+        return resizedImage;
     }
 }

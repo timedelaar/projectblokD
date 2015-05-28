@@ -9,9 +9,8 @@ import java.awt.Font;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JLabel;
-import javax.swing.Timer;
-import javax.swing.JPanel;
+import java.awt.image.BufferedImage;
+import javax.swing.*;
 
 /**
  *
@@ -22,6 +21,8 @@ public class Doolhof extends JPanel {
     private int width;
     private int height;
     private int VELD_SIZE;
+    
+    private Knop resetKnop;
     
     Timer timer;
     JLabel scoreLabel;
@@ -62,8 +63,9 @@ public class Doolhof extends JPanel {
         this.height = height;
         init();
         maakScoreBoard();
-        startScoreTimer();
+        addResetKnop();
         maakDoolhof();
+        startScoreTimer();
     }
     
     private void init () {
@@ -72,15 +74,29 @@ public class Doolhof extends JPanel {
     }
     
     private void maakScoreBoard () {
-        scoreLabel = new JLabel("tijd: 00:00");
+        BufferedImage image = Spel.loadImage("sign.png");
+        image = Spel.resizeImage(image, 100, 25);
+        scoreLabel = new JLabel("tijd: 00:00", new ImageIcon(image), SwingConstants.LEFT);
+        scoreLabel.setHorizontalTextPosition(JLabel.CENTER);
+        scoreLabel.setVerticalTextPosition(JLabel.CENTER);
         scoreLabel.setForeground(Color.white);
-        scoreLabel.setBackground(Color.black);
-        scoreLabel.setOpaque(true);
         add(scoreLabel);
-        scoreLabel.setLocation(10, 10);
+        scoreLabel.setLocation(30, 2);
         scoreLabel.setSize(100, 25);
         Font scoreFont = scoreLabel.getFont();
-        scoreLabel.setFont(new Font(scoreFont.getFontName(), Font.PLAIN, 20));
+        scoreLabel.setFont(new Font(scoreFont.getFontName(), Font.PLAIN, 16));
+    }
+    
+    private void addResetKnop () {
+        resetKnop = new Knop("reset-sign.png", Knop.RESET);
+        add(resetKnop);
+        resetKnop.setSize(70, 25);
+        resetKnop.setLocation(500, 2);
+        resetKnop.addMouseListener(new KnopListener(this, resetKnop));
+    }
+    
+    public void opnieuwStarten () {
+        System.out.println("reset");
     }
     
     private void startScoreTimer () {
