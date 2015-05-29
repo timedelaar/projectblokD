@@ -41,7 +41,7 @@ public class VeldTest {
      * Test of getNeighbour method, of class Veld.
      */
     @Test
-    public void testGetNeighbour () {
+    public void testSetGetNeighbour () {
         veld.setNeighbour(Richtingen.EAST, veld2);
         Veld result = veld.getNeighbour(Richtingen.EAST);
         assertEquals(veld2, result);
@@ -51,7 +51,7 @@ public class VeldTest {
      * Test of getSpelItem method, of class Veld.
      */
     @Test
-    public void testGetSpelItem () {
+    public void testSetGetSpelItem () {
         Muur muur = new Muur();
         veld.setSpelItem(muur);
         SpelItem expResult = muur;
