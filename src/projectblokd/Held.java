@@ -34,13 +34,15 @@ public class Held extends SpelItem {
         laatsteRichting = richting;
         Veld huidigVeld = getVeld();
         Veld nieuwVeld = huidigVeld.getNeighbour(richting);
-        if (checkVeld(nieuwVeld)) {
-            nieuwVeld.setSpelItem(this);
-            huidigVeld.verwijderSpelItem();
-            nieuwVeld.repaint();
-            huidigVeld.repaint();
-            if (bazooka != null) {
-                bazooka.setVeld(nieuwVeld);
+        if (nieuwVeld != null) {
+            if (checkVeld(nieuwVeld)) {
+                nieuwVeld.setSpelItem(this);
+                huidigVeld.verwijderSpelItem();
+                nieuwVeld.repaint();
+                huidigVeld.repaint();
+                if (bazooka != null) {
+                    bazooka.setVeld(nieuwVeld);
+                }
             }
         }
     }
