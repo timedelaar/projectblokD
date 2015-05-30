@@ -67,7 +67,10 @@ public class Kogel {
 
     private boolean checkHit(Veld veld) {
         SpelItem item = veld.getSpelItem();
-        if (item instanceof Muur) {
+        if (item instanceof MuurRand){
+            return false;
+        }
+        else if (item instanceof Muur) {
             return true;
         }
         else
