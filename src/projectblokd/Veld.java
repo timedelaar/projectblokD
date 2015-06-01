@@ -23,14 +23,13 @@ public class Veld extends JComponent {
     private PriorityQueue<SpelItem> spelItems;
     private BufferedImage image;
     
-    private RouteState onderdeelRoute;
+    private boolean onderdeelRoute;
     private int afstandVanHelper = Integer.MAX_VALUE;
     
     public Veld () {
         buren = new HashMap<>();
         spelItems = new PriorityQueue<>();
         setImage(Spel.loadImage("veld.png"));
-        onderdeelRoute = RouteState.NIETGEWEEST;
     }
     
     public final void setImage (BufferedImage image) {
@@ -115,19 +114,19 @@ public class Veld extends JComponent {
         return afstandVanHelper;
     }
     
-    public void isOnderdeelRoute (RouteState state) {
-        onderdeelRoute = state;
+    public void isOnderdeelRoute (boolean bool) {
+        onderdeelRoute = bool;
         repaint();
     }
     
-    public RouteState getOnderdeelRoute () {
+    public boolean getOnderdeelRoute () {
         return onderdeelRoute;
     }
     
     @Override
     public void paintComponent (Graphics g) {
         g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
-        if (onderdeelRoute == RouteState.WELONDERDEEL) {
+        if (onderdeelRoute) {
             Color color = new Color(255, 0, 0, 100);
             g.setColor(color);
             g.fillRect(0, 0, getWidth(), getHeight());

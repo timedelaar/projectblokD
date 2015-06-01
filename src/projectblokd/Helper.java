@@ -96,7 +96,7 @@ public class Helper extends PowerUp {
     }
     
     private void markeerRoute (Veld huidigVeld) {
-            huidigVeld.isOnderdeelRoute(RouteState.WELONDERDEEL);
+            huidigVeld.isOnderdeelRoute(true);
             if (huidigVeld.getAfstand() != 0) {
                 ArrayList<Veld> buren = huidigVeld.getNeighbours();
                 Veld volgendVeld = vindLaagsteAfstand(buren);
