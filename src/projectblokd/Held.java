@@ -49,24 +49,23 @@ public class Held extends SpelItem {
     
     public boolean checkVeld (Veld veld) {
         SpelItem item = veld.getSpelItem();
-        if (item == null) {
-            return true;
-        }
-        else if (item instanceof Muur) {
+        if (!(item instanceof Walkable)) {
             return false;
         }
-        else if (item instanceof PowerUp) {
-            PowerUp powerUp = (PowerUp) item;
-            if (powerUp instanceof Bazooka) {
-                Bazooka b = (Bazooka) powerUp;
-                b.setHeld(this);
+        else {
+            if (item instanceof PowerUp) {
+                PowerUp powerUp = (PowerUp) item;
+                if (powerUp instanceof Bazooka) {
+                    Bazooka b = (Bazooka) powerUp;
+                    b.setHeld(this);
+                }
+                powerUp.actie();
             }
-            powerUp.actie();
+            else if (item instanceof Vriend) {
+                doolhof.stopSpel();
+            }
+            return true;
         }
-        else if (item instanceof Vriend) {
-            doolhof.stopSpel();
-        }
-        return true;
     }
     
     public void addBazooka (Bazooka bazooka) {

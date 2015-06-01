@@ -8,8 +8,6 @@ package projectblokd;
  *
  * @author Tim
  */
-public abstract class PowerUp extends SpelItem implements Walkable {
-    
-    public abstract void actie ();
-    
+public enum RouteState {
+    GEWEEST, NIETGEWEEST, GEENONDERDEEL, WELONDERDEEL;
 }

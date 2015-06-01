@@ -4,6 +4,7 @@
  */
 package projectblokd;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
@@ -19,10 +20,12 @@ public class Veld extends JComponent {
     private SpelItem spelItem;
     private BufferedImage image;
     private Kogel kogel;
+    private RouteState onderdeelRoute;
     
     public Veld () {
         buren = new HashMap<>();
         setImage(Spel.loadImage("veld.png"));
+        onderdeelRoute = RouteState.NIETGEWEEST;
     }
     
     public final void setImage (BufferedImage image) {
@@ -57,9 +60,23 @@ public class Veld extends JComponent {
         this.kogel = kogel;
     }
     
+    public void isOnderdeelRoute (RouteState state) {
+        onderdeelRoute = state;
+        repaint();
+    }
+    
+    public RouteState getOnderdeelRoute () {
+        return onderdeelRoute;
+    }
+    
     @Override
     public void paintComponent (Graphics g) {
         g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
+        if (onderdeelRoute == RouteState.WELONDERDEEL) {
+            Color color = new Color(255, 0, 0, 100);
+            g.setColor(color);
+            g.fillRect(0, 0, getWidth(), getHeight());
+        }
         if (spelItem != null) {
             if (spelItem.getImage() != null) {
                 g.drawImage(spelItem.getImage(), 0, 0, getWidth(), getHeight(), this);
