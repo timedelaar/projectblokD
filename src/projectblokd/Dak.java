@@ -4,15 +4,20 @@
  */
 package projectblokd;
 
-import java.util.Iterator;
+import java.awt.image.BufferedImage;
 
 /**
  *
  * @author Tim
  */
-public abstract class PowerUp extends SpelItem {
+public class Dak extends SpelItem {
     
-    public abstract void actie (Held held, Iterator iter);
+    public Dak() {
+        setImage(Spel.loadImage("muur.png"));
+        BufferedImage newImage = Spel.addTransparency(getImage(), 0.55f);
+        setImage(newImage);
+        setDrawPriority(14);
+    }
     
     public boolean kanVerplaatsen (Held held) {
         return true;

@@ -4,6 +4,8 @@
  */
 package projectblokd;
 
+import java.util.Iterator;
+
 /**
  *
  * @author Tim
@@ -20,8 +22,9 @@ public class Cheater extends PowerUp {
     }
 
     @Override
-    public void actie () {
+    public void actie (Held held, Iterator iter) {
         doolhof.verlaagScore(waarde);
+        iter.remove();
     }
     
 }

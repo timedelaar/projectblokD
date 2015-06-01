@@ -4,6 +4,7 @@
  */
 package projectblokd;
 
+import java.awt.AlphaComposite;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics2D;
@@ -88,5 +89,15 @@ public class Spel extends JPanel {
         g2.drawImage(image, 0, 0, width, height, null);
         g2.dispose();
         return resizedImage;
+    }
+    
+    public static BufferedImage addTransparency (BufferedImage image, float t) {
+        BufferedImage newImage = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2 = newImage.createGraphics();
+        AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, t);
+        g2.setComposite(ac);
+        g2.drawImage(image, 0, 0, null);
+        g2.dispose();
+        return newImage;
     }
 }

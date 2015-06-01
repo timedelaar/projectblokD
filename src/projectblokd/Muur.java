@@ -13,4 +13,12 @@ public class Muur extends SpelItem {
     public Muur() {
         setImage(Spel.loadImage("muur-rand.png"));
     }
+    
+    public boolean kanVerplaatsen (Held held) {
+        return false;
+    }
+    
+    public boolean kanVerplaatsen (Kogel kogel) {
+        return false;
+    }
 }

@@ -8,6 +8,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.PriorityQueue;
 import javax.swing.JComponent;
 
 /**
@@ -17,13 +19,13 @@ import javax.swing.JComponent;
 public class Veld extends JComponent {
     
     private HashMap<Richtingen, Veld> buren;
-    private SpelItem spelItem;
+    private PriorityQueue<SpelItem> spelItems;
     private BufferedImage image;
-    private Kogel kogel;
     private RouteState onderdeelRoute;
     
     public Veld () {
         buren = new HashMap<>();
+        spelItems = new PriorityQueue<>();
         setImage(Spel.loadImage("veld.png"));
         onderdeelRoute = RouteState.NIETGEWEEST;
     }
@@ -40,24 +42,57 @@ public class Veld extends JComponent {
         return buren.get(richting);
     }
     
-    public void setSpelItem (SpelItem spelItem) {
-        this.spelItem = spelItem;
+    public boolean kanVerplaatsen (Held held) {
+        for (SpelItem item : spelItems) {
+            if (!item.kanVerplaatsen(held))
+                return false;
+        }
+        return true;
+    }
+    
+    public boolean kanVerplaatsen (Kogel kogel) {
+        for (SpelItem item : spelItems) {
+            if (!item.kanVerplaatsen(kogel))
+                return false;
+        }
+        return true;
+    }
+    
+    public void addSpelItem (SpelItem spelItem) {
+        spelItems.add(spelItem);
         spelItem.setVeld(this);
     }
     
-    public SpelItem getSpelItem () {
-        return spelItem;
+    public void verwijderSpelItem (SpelItem item) {
+        spelItems.remove(item);
     }
     
-    public void verwijderSpelItem () {
-        spelItem = null;
+    public void destroySpelItems () {
+        Iterator iter = spelItems.iterator();
+        while (iter.hasNext()) {
+            SpelItem item = (SpelItem) iter.next();
+            if (item instanceof Destructable) {
+                Destructable d = (Destructable) item;
+                d.destroy(iter);
+            }
+        }
     }
-    public void verwijderKogel(){
-        kogel = null;
+    
+    public void powerUp (Held held) {
+        Iterator iter = spelItems.iterator();
+        while (iter.hasNext()) {
+            SpelItem item = (SpelItem) iter.next();
+            item.actie(held, iter);
+        }
     }
-    public void setKogel(Kogel kogel)
-    {
-        this.kogel = kogel;
+    
+    public boolean hasVriend () {
+        for (SpelItem item : spelItems) {
+            if (item instanceof Vriend) {
+                return true;
+            }
+        }
+        return false;
     }
     
     public void isOnderdeelRoute (RouteState state) {
@@ -77,14 +112,11 @@ public class Veld extends JComponent {
             g.setColor(color);
             g.fillRect(0, 0, getWidth(), getHeight());
         }
-        if (spelItem != null) {
-            if (spelItem.getImage() != null) {
-                g.drawImage(spelItem.getImage(), 0, 0, getWidth(), getHeight(), this);
-            }
-        }
-        if (kogel != null) {
-            if (kogel.getImage() != null) {
-                g.drawImage(kogel.getImage(), 0, 0, getWidth(), getHeight(), this);
+        if (spelItems.size() > 0) {
+            for (SpelItem item : spelItems) {
+                if (item.getImage() != null) {
+                    g.drawImage(item.getImage(), 0, 0, getWidth(), getHeight(), this);
+                }
             }
         }
     }

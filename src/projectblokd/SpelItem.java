@@ -5,17 +5,25 @@
 package projectblokd;
 
 import java.awt.image.BufferedImage;
-import java.net.URL;
-import javax.imageio.ImageIO;
+import java.util.Iterator;
 
 /**
  *
  * @author Tim
  */
-public abstract class SpelItem {
+public abstract class SpelItem implements Comparable {
     
     private BufferedImage image;
     private Veld veld;
+    private int drawPriority = 20;
+    
+    public void setDrawPriority (int priority) {
+        drawPriority = priority;
+    }
+    
+    public int getDrawPriority () {
+        return drawPriority;
+    }
     
     public void setImage (BufferedImage image) {
         this.image = image;
@@ -31,5 +39,27 @@ public abstract class SpelItem {
     
     public Veld getVeld () {
         return veld;
+    }
+    
+    public abstract boolean kanVerplaatsen (Held held);
+    
+    public abstract boolean kanVerplaatsen (Kogel kogel);
+    
+    public void destroy (){};
+    
+    public void actie (Held held, Iterator iter){}
+    
+    @Override
+    public int compareTo (Object o) {
+        SpelItem item = (SpelItem) o;
+        if (drawPriority < item.getDrawPriority()) {
+            return 1;
+        }
+        else if (drawPriority > item.getDrawPriority()) {
+            return -1;
+        }
+        else {
+            return 0;
+        }
     }
 }

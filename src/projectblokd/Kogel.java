@@ -13,18 +13,15 @@ import javax.swing.Timer;
  *
  * @author Tim
  */
-public class Kogel {
+public class Kogel extends SpelItem {
     
-    private Veld huidigVeld;
     private Timer timer;
     private BufferedImage image;
     private Richtingen richting;
 
-    public Kogel(Veld veld, Richtingen richting) {
+    public Kogel(Richtingen richting) {
         image = Spel.loadImage("cheater.png");
         this.richting = richting;
-        huidigVeld = veld;
-        veld.setKogel(this);
         startTimer();
     }
     
@@ -40,48 +37,48 @@ public class Kogel {
         timer.start();
     }
 
-    private void verplaats() {              
+    private void verplaats() {
+        Veld huidigVeld = getVeld();
         Veld nieuwVeld = huidigVeld.getNeighbour(richting);
         if (nieuwVeld != null) {
-            if (checkHit(nieuwVeld) == false) {
-                nieuwVeld.setKogel(this);
-                huidigVeld.verwijderKogel();
+            if (!checkHit(nieuwVeld)) {
+                nieuwVeld.addSpelItem(this);
+                huidigVeld.verwijderSpelItem(this);
                 nieuwVeld.repaint();
                 huidigVeld.repaint();
-                huidigVeld = nieuwVeld;
+                setVeld(nieuwVeld);
             }
             else {
-                huidigVeld.verwijderKogel();
+                huidigVeld.verwijderSpelItem(this);
+                nieuwVeld.destroySpelItems();
                 nieuwVeld.repaint();
                 huidigVeld.repaint();
                 timer.stop();
             }
         }
         else {
-            huidigVeld.verwijderKogel();
+            huidigVeld.verwijderSpelItem(this);
             huidigVeld.repaint();
             timer.stop();
         }
     }
-
-    private boolean checkHit(Veld veld) {
-        SpelItem item = veld.getSpelItem();
-        if (item instanceof SpelItem && item instanceof Destructable){
-            Destructable d = (Destructable) item;
-            d.destroy();
-            return true;
-        }
-        else if (item instanceof PowerUp) {
+    
+    private boolean checkHit (Veld veld) {
+        if (veld.kanVerplaatsen(this))
             return false;
-        }
-        else if (item instanceof SpelItem && !(item instanceof Destructable)) {
-            return true;
-        }
         else
-            return false;
+            return true;
     }
     
     public BufferedImage getImage () {
         return image;
+    }
+    
+    public boolean kanVerplaatsen (Held held) {
+        return true;
+    }
+    
+    public boolean kanVerplaatsen (Kogel kogel) {
+        return true;
     }
 }

@@ -4,29 +4,34 @@
  */
 package projectblokd;
 
+import java.util.Iterator;
+
 /**
  *
  * @author Tim
  */
 public class Helper extends PowerUp {
 
+    private Held held;
+    
     public Helper () {
         setImage(Spel.loadImage("helper.png"));
     }
     
     @Override
-    public void actie () {
+    public void actie (Held held, Iterator iter) {
+        this.held = held;
         Veld veld = getVeld();
-        System.out.println(vindRoute(veld));
+        vindRoute(veld);
+        iter.remove();
     }
     
     private boolean vindRoute(Veld veld) {
-        SpelItem item = veld.getSpelItem();
-        if (item instanceof Vriend) {
+        if (veld.hasVriend()) {
             veld.isOnderdeelRoute(RouteState.WELONDERDEEL);
             return true;
         }
-        if (item instanceof Muur || veld.getOnderdeelRoute() == RouteState.GEWEEST) {
+        if (!veld.kanVerplaatsen(held) || veld.getOnderdeelRoute() == RouteState.GEWEEST) {
             return false;
         }
         veld.isOnderdeelRoute(RouteState.GEWEEST);

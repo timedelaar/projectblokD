@@ -10,8 +10,22 @@ package projectblokd;
  */
 public class Vriend extends SpelItem {
     
-    public Vriend () {
+    private Doolhof doolhof;
+    
+    public Vriend (Doolhof doolhof) {
+        this.doolhof = doolhof;
         setImage(Spel.loadImage("vriend.png"));
     }
     
+    public void stopSpel () {
+        doolhof.stopSpel();
+    }
+    
+    public boolean kanVerplaatsen (Held held) {
+        return true;
+    }
+    
+    public boolean kanVerplaatsen (Kogel kogel) {
+        return true;
+    }
 }

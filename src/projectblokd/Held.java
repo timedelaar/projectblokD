@@ -11,16 +11,13 @@ package projectblokd;
  */
 public class Held extends SpelItem {
     
-    private Doolhof doolhof;
-    
     private Bazooka bazooka;
     
     private Richtingen laatsteRichting;
     
-    public Held (Doolhof doolhof) {
-        this.doolhof = doolhof;
-        
+    public Held () {
         setImage(Spel.loadImage("held.png"));
+        setDrawPriority(15);
     }
     
     public void schiet (){
@@ -35,40 +32,25 @@ public class Held extends SpelItem {
         Veld huidigVeld = getVeld();
         Veld nieuwVeld = huidigVeld.getNeighbour(richting);
         if (nieuwVeld != null) {
-            if (checkVeld(nieuwVeld)) {
-                nieuwVeld.setSpelItem(this);
-                huidigVeld.verwijderSpelItem();
+            if (nieuwVeld.kanVerplaatsen(this)) {
+                nieuwVeld.addSpelItem(this);
+                huidigVeld.verwijderSpelItem(this);
+                nieuwVeld.powerUp(this);
                 nieuwVeld.repaint();
                 huidigVeld.repaint();
-                if (bazooka != null) {
-                    bazooka.setVeld(nieuwVeld);
-                }
             }
-        }
-    }
-    
-    public boolean checkVeld (Veld veld) {
-        SpelItem item = veld.getSpelItem();
-        if (!(item instanceof Walkable)) {
-            return false;
-        }
-        else {
-            if (item instanceof PowerUp) {
-                PowerUp powerUp = (PowerUp) item;
-                if (powerUp instanceof Bazooka) {
-                    Bazooka b = (Bazooka) powerUp;
-                    b.setHeld(this);
-                }
-                powerUp.actie();
-            }
-            else if (item instanceof Vriend) {
-                doolhof.stopSpel();
-            }
-            return true;
         }
     }
     
     public void addBazooka (Bazooka bazooka) {
         this.bazooka = bazooka;
+    }
+    
+    public boolean kanVerplaatsen (Held held) {
+        return true;
+    }
+    
+    public boolean kanVerplaatsen (Kogel kogel) {
+        return true;
     }
 }

@@ -4,6 +4,8 @@
  */
 package projectblokd;
 
+import java.util.Iterator;
+
 /**
  *
  * @author Tim
@@ -14,7 +16,7 @@ public class ZwakkeMuur extends Muur implements Destructable {
         setImage(Spel.loadImage("muur.png"));
     }
     
-    public void destroy () {
-        getVeld().verwijderSpelItem();
+    public void destroy (Iterator iter) {
+        iter.remove();
     }
 }

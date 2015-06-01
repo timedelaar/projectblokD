@@ -4,6 +4,8 @@
  */
 package projectblokd;
 
+import java.util.Iterator;
+
 /**
  *
  * @author Tim
@@ -17,15 +19,15 @@ public class Bazooka extends PowerUp {
     }
 
     public void schiet (Richtingen richting) {
-        Kogel kogel = new Kogel(getVeld(), richting);
+        Kogel kogel = new Kogel(richting);
+        held.getVeld().addSpelItem(kogel);
+        kogel.setVeld(held.getVeld());
     }   
     
     @Override
-    public void actie () {
-        held.addBazooka(this);
-    }
-    
-    public void setHeld (Held held) {
+    public void actie (Held held, Iterator iter) {
         this.held = held;
+        held.addBazooka(this);
+        iter.remove();
     }
 }

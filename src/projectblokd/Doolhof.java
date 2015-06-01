@@ -35,13 +35,14 @@ public class Doolhof extends JPanel {
      * 5 = helper
      * 6 = bazooka
      * 7 = muurrand
+     * 8 = dak
      */
     private int[][] doolhofLayout = {{7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7},
                                      {7, 2, 1, 0, 5, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 7},
                                      {7, 0, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 7},
-                                     {7, 0, 1, 0, 1, 0, 1, 6, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 7},
-                                     {7, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 7},
-                                     {7, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 7},
+                                     {7, 8, 1, 0, 1, 0, 1, 6, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 7},
+                                     {7, 8, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 7},
+                                     {7, 8, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 7},
                                      {7, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 7},
                                      {7, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 7},
                                      {7, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 7},
@@ -164,32 +165,36 @@ public class Doolhof extends JPanel {
     private void addSpelItem (Veld veld, int item) {
         if (item == 1) {
             ZwakkeMuur muur = new ZwakkeMuur();
-            veld.setSpelItem(muur);
+            veld.addSpelItem(muur);
         }
         else if (item == 2) {
-            Held held = new Held(this);
-            veld.setSpelItem(held);
+            Held held = new Held();
+            veld.addSpelItem(held);
             startKeyBoardListener(held);
         }
         else if (item == 3) {
-            Vriend vriend = new Vriend();
-            veld.setSpelItem(vriend);
+            Vriend vriend = new Vriend(this);
+            veld.addSpelItem(vriend);
         }
         else if (item == 4) {
             Cheater cheater = new Cheater(CHEATER_WAARDE, this);
-            veld.setSpelItem(cheater);
+            veld.addSpelItem(cheater);
         }
         else if (item == 5) {
             Helper helper = new Helper();
-            veld.setSpelItem(helper);
+            veld.addSpelItem(helper);
         }
         else if (item == 6) {
             Bazooka bazooka = new Bazooka();
-            veld.setSpelItem(bazooka);
+            veld.addSpelItem(bazooka);
         }
         else if (item == 7) {
             Muur muur = new Muur();
-            veld.setSpelItem(muur);
+            veld.addSpelItem(muur);
+        }
+        else if (item == 8) {
+            Dak dak = new Dak();
+            veld.addSpelItem(dak);
         }
     }
     

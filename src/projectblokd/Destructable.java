@@ -4,11 +4,13 @@
  */
 package projectblokd;
 
+import java.util.Iterator;
+
 /**
  *
  * @author Tim
  */
 public interface Destructable {
     
-    public void destroy ();
+    public void destroy (Iterator iter);
 }
