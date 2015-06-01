@@ -54,7 +54,7 @@ public class HeldTest {
     @Test
     public void testCheckVeld2 () {
         Veld veld = new Veld();
-        SpelItem item = new Muur();
+        SpelItem item = new ZwakkeMuur();
         veld.setSpelItem(item);
         boolean expResult = false;
         boolean result = instance.checkVeld(veld);
@@ -97,7 +97,7 @@ public class HeldTest {
         Veld huidigVeld = new Veld();
         huidigVeld.setSpelItem(instance);
         Veld buurOost = new Veld();
-        SpelItem item = new Muur();
+        SpelItem item = new ZwakkeMuur();
         buurOost.setSpelItem(item);
         huidigVeld.setNeighbour(Richtingen.EAST, buurOost);
         Richtingen richting = Richtingen.EAST;

@@ -6,11 +6,9 @@ package projectblokd;
 
 /**
  *
- * @author Aymren
+ * @author Tim
  */
-public class Muur extends SpelItem {
-
-    public Muur() {
-        setImage(Spel.loadImage("muur-rand.png"));
-    }
+public interface Destructable {
+    
+    public void destroy ();
 }

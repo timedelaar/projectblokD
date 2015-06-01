@@ -52,7 +52,6 @@ public class Kogel {
             }
             else {
                 huidigVeld.verwijderKogel();
-                nieuwVeld.verwijderSpelItem();
                 nieuwVeld.repaint();
                 huidigVeld.repaint();
                 timer.stop();
@@ -67,10 +66,15 @@ public class Kogel {
 
     private boolean checkHit(Veld veld) {
         SpelItem item = veld.getSpelItem();
-        if (item instanceof MuurRand){
+        if (item instanceof SpelItem && item instanceof Destructable){
+            Destructable d = (Destructable) item;
+            d.destroy();
+            return true;
+        }
+        else if (item instanceof PowerUp) {
             return false;
         }
-        else if (item instanceof Muur) {
+        else if (item instanceof SpelItem && !(item instanceof Destructable)) {
             return true;
         }
         else

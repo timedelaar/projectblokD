@@ -163,7 +163,7 @@ public class Doolhof extends JPanel {
     
     private void addSpelItem (Veld veld, int item) {
         if (item == 1) {
-            Muur muur = new Muur();
+            ZwakkeMuur muur = new ZwakkeMuur();
             veld.setSpelItem(muur);
         }
         else if (item == 2) {
@@ -188,8 +188,8 @@ public class Doolhof extends JPanel {
             veld.setSpelItem(bazooka);
         }
         else if (item == 7) {
-            MuurRand muurRand = new MuurRand();
-            veld.setSpelItem(muurRand);
+            Muur muur = new Muur();
+            veld.setSpelItem(muur);
         }
     }
     

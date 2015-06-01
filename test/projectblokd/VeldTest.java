@@ -52,7 +52,7 @@ public class VeldTest {
      */
     @Test
     public void testSetGetSpelItem () {
-        Muur muur = new Muur();
+        ZwakkeMuur muur = new ZwakkeMuur();
         veld.setSpelItem(muur);
         SpelItem expResult = muur;
         SpelItem result = veld.getSpelItem();
@@ -64,7 +64,7 @@ public class VeldTest {
      */
     @Test
     public void testVerwijderSpelItem () {
-        Muur muur = new Muur();
+        ZwakkeMuur muur = new ZwakkeMuur();
         veld.setSpelItem(muur);
         veld.verwijderSpelItem();
         SpelItem expResult = null;
