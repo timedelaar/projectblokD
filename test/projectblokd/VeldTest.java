@@ -46,29 +46,16 @@ public class VeldTest {
         Veld result = veld.getNeighbour(Richtingen.EAST);
         assertEquals(veld2, result);
     }
-
-    /**
-     * Test of getSpelItem method, of class Veld.
-     */
+    
     @Test
-    public void testSetGetSpelItem () {
-        ZwakkeMuur muur = new ZwakkeMuur();
-        veld.setSpelItem(muur);
-        SpelItem expResult = muur;
-        SpelItem result = veld.getSpelItem();
-        assertEquals(expResult, result);
+    public void testHasVriend () {
+        veld.addSpelItem(new Vriend(new Doolhof(100,100)));
+        assertTrue(veld.hasVriend());
     }
-
-    /**
-     * Test of verwijderSpelItem method, of class Veld.
-     */
+    
     @Test
-    public void testVerwijderSpelItem () {
-        ZwakkeMuur muur = new ZwakkeMuur();
-        veld.setSpelItem(muur);
-        veld.verwijderSpelItem();
-        SpelItem expResult = null;
-        SpelItem result = veld.getSpelItem();
-        assertEquals(expResult, result);
+    public void testHasVriend2 () {
+        veld.addSpelItem(new Muur());
+        assertTrue(!veld.hasVriend());
     }
 }

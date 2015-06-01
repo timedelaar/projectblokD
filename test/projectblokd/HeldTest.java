@@ -29,49 +29,11 @@ public class HeldTest {
     
     @Before
     public void setUp () {
-        doolhof = new Doolhof(100, 100);
-        instance = new Held(doolhof);
+        instance = new Held();
     }
     
     @After
     public void tearDown () {
-    }
-
-    /**
-     * Test of checkVeld method, of class Held.
-     */
-    @Test
-    public void testCheckVeld1 () {
-        Veld veld = new Veld();
-        boolean expResult = true;
-        boolean result = instance.checkVeld(veld);
-        assertEquals(expResult, result);
-    }
-    
-    /**
-     * Test of checkVeld method, of class Held.
-     */
-    @Test
-    public void testCheckVeld2 () {
-        Veld veld = new Veld();
-        SpelItem item = new ZwakkeMuur();
-        veld.setSpelItem(item);
-        boolean expResult = false;
-        boolean result = instance.checkVeld(veld);
-        assertEquals(expResult, result);
-    }
-    
-    /**
-     * Test of checkVeld method, of class Held.
-     */
-    @Test
-    public void testCheckVeld3 () {
-        Veld veld = new Veld();
-        SpelItem item = new Cheater(10, doolhof);
-        veld.setSpelItem(item);
-        boolean expResult = true;
-        boolean result = instance.checkVeld(veld);
-        assertEquals(expResult, result);
     }
 
     /**
@@ -80,13 +42,13 @@ public class HeldTest {
     @Test
     public void testVerplaats1 () {
         Veld huidigVeld = new Veld();
-        huidigVeld.setSpelItem(instance);
+        huidigVeld.addSpelItem(instance);
         Veld buurOost = new Veld();
         huidigVeld.setNeighbour(Richtingen.EAST, buurOost);
         Richtingen richting = Richtingen.EAST;
         instance.verplaats(richting);
-        assertEquals(null, huidigVeld.getSpelItem());
-        assertEquals(instance, buurOost.getSpelItem());
+        assertEquals(null, huidigVeld.hasSpelItem());
+        assertEquals(instance, buurOost.hasSpelItem());
     }
     
     /**
@@ -95,15 +57,15 @@ public class HeldTest {
     @Test
     public void testVerplaats2 () {
         Veld huidigVeld = new Veld();
-        huidigVeld.setSpelItem(instance);
+        huidigVeld.addSpelItem(instance);
         Veld buurOost = new Veld();
         SpelItem item = new ZwakkeMuur();
-        buurOost.setSpelItem(item);
+        buurOost.addSpelItem(item);
         huidigVeld.setNeighbour(Richtingen.EAST, buurOost);
         Richtingen richting = Richtingen.EAST;
         instance.verplaats(richting);
-        assertEquals(instance, huidigVeld.getSpelItem());
-        assertEquals(item, buurOost.getSpelItem());
+        assertEquals(instance, huidigVeld.hasSpelItem());
+        assertEquals(item, buurOost.hasSpelItem());
     }
     
     /**
@@ -112,14 +74,14 @@ public class HeldTest {
     @Test
     public void testVerplaats3 () {
         Veld huidigVeld = new Veld();
-        huidigVeld.setSpelItem(instance);
+        huidigVeld.addSpelItem(instance);
         Veld buurOost = new Veld();
-        SpelItem item = new Cheater(10, doolhof);
-        buurOost.setSpelItem(item);
+        SpelItem item = new Cheater(10, new Doolhof(100,100));
+        buurOost.addSpelItem(item);
         huidigVeld.setNeighbour(Richtingen.EAST, buurOost);
         Richtingen richting = Richtingen.EAST;
         instance.verplaats(richting);
-        assertEquals(null, huidigVeld.getSpelItem());
-        assertEquals(instance, buurOost.getSpelItem());
+        assertEquals(null, huidigVeld.hasSpelItem());
+        assertEquals(instance, buurOost.hasSpelItem());
     }
 }
