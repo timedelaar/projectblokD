@@ -7,6 +7,7 @@ package projectblokd;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.PriorityQueue;
@@ -21,7 +22,9 @@ public class Veld extends JComponent {
     private HashMap<Richtingen, Veld> buren;
     private PriorityQueue<SpelItem> spelItems;
     private BufferedImage image;
+    
     private RouteState onderdeelRoute;
+    private int afstandVanHelper = Integer.MAX_VALUE;
     
     public Veld () {
         buren = new HashMap<>();
@@ -40,6 +43,14 @@ public class Veld extends JComponent {
     
     public Veld getNeighbour (Richtingen richting) {
         return buren.get(richting);
+    }
+    
+    public ArrayList<Veld> getNeighbours () {
+        ArrayList<Veld> burenList = new ArrayList<>();
+        for (Richtingen richting : buren.keySet()) {
+            burenList.add(buren.get(richting));
+        }
+        return burenList;
     }
     
     public boolean kanVerplaatsen (Held held) {
@@ -93,6 +104,15 @@ public class Veld extends JComponent {
             }
         }
         return false;
+    }
+    
+    public void setAfstand (int afstand) {
+        if (afstand < afstandVanHelper)
+            afstandVanHelper = afstand;
+    }
+    
+    public int getAfstand () {
+        return afstandVanHelper;
     }
     
     public void isOnderdeelRoute (RouteState state) {
