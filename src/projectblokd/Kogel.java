@@ -6,7 +6,6 @@ package projectblokd;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import javax.swing.Timer;
 
 /**
@@ -16,11 +15,10 @@ import javax.swing.Timer;
 public class Kogel extends SpelItem {
     
     private Timer timer;
-    private BufferedImage image;
     private Richtingen richting;
 
     public Kogel(Richtingen richting) {
-        image = Spel.loadImage("cheater.png");
+        setImage(Spel.loadImage("cheater.png"));
         this.richting = richting;
         startTimer();
     }
@@ -41,7 +39,7 @@ public class Kogel extends SpelItem {
         Veld huidigVeld = getVeld();
         Veld nieuwVeld = huidigVeld.getNeighbour(richting);
         if (nieuwVeld != null) {
-            if (!checkHit(nieuwVeld)) {
+            if (nieuwVeld.kanVerplaatsen(this)) {
                 nieuwVeld.addSpelItem(this);
                 huidigVeld.verwijderSpelItem(this);
                 nieuwVeld.repaint();
@@ -61,17 +59,6 @@ public class Kogel extends SpelItem {
             huidigVeld.repaint();
             timer.stop();
         }
-    }
-    
-    private boolean checkHit (Veld veld) {
-        if (veld.kanVerplaatsen(this))
-            return false;
-        else
-            return true;
-    }
-    
-    public BufferedImage getImage () {
-        return image;
     }
     
     public boolean kanVerplaatsen (Held held) {

@@ -90,7 +90,6 @@ public class Helper extends PowerUp {
                     huidigVeld = vindLaagsteAfstand(onbezochteVelden);
                 }
             }
-            
         }
         return gevonden;
     }

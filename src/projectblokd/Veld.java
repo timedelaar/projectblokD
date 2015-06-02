@@ -81,10 +81,7 @@ public class Veld extends JComponent {
         Iterator iter = spelItems.iterator();
         while (iter.hasNext()) {
             SpelItem item = (SpelItem) iter.next();
-            if (item instanceof Destructable) {
-                Destructable d = (Destructable) item;
-                d.destroy(iter);
-            }
+            item.destroy(iter);
         }
     }
     
@@ -99,6 +96,15 @@ public class Veld extends JComponent {
     public boolean hasVriend () {
         for (SpelItem item : spelItems) {
             if (item instanceof Vriend) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public boolean hasWater () {
+        for (SpelItem item : spelItems) {
+            if (item instanceof Water) {
                 return true;
             }
         }

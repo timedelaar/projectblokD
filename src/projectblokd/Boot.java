@@ -10,13 +10,16 @@ import java.util.Iterator;
  *
  * @author Tim
  */
-public class ZwakkeMuur extends Muur {
+public class Boot extends PowerUp {
     
-    public ZwakkeMuur () {
-        setImage(Spel.loadImage("muur.png"));
+    public Boot () {
+        setImage(Spel.loadImage("boot.png"));
     }
-    
-    public void destroy (Iterator iter) {
+
+    @Override
+    public void actie (Held held, Iterator iter) {
+        held.addBoot(this);
         iter.remove();
     }
+    
 }

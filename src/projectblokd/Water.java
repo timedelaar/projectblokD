@@ -4,25 +4,29 @@
  */
 package projectblokd;
 
-import java.util.Iterator;
-
 /**
  *
  * @author Tim
  */
-public abstract class PowerUp extends SpelItem {
+public class Water extends SpelItem {
     
-    public PowerUp () {
-        setDrawPriority(19);
+    public Water () {
+        setImage(Spel.loadImage("water.png"));
     }
-    
-    public abstract void actie (Held held, Iterator iter);
-    
+
+    @Override
     public boolean kanVerplaatsen (Held held) {
-        return true;
+        if (held.hasBoot()) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
-    
+
+    @Override
     public boolean kanVerplaatsen (Kogel kogel) {
         return true;
     }
+    
 }

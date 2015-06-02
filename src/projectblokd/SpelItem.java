@@ -45,7 +45,9 @@ public abstract class SpelItem implements Comparable {
     
     public abstract boolean kanVerplaatsen (Kogel kogel);
     
-    public void destroy (){};
+    public void destroy (){}
+    
+    public void destroy (Iterator iter){}
     
     public void actie (Held held, Iterator iter){}
     
