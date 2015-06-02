@@ -93,6 +93,33 @@ public class Veld extends JComponent {
         }
     }
     
+    public boolean hasBoot () {
+        for (SpelItem item : spelItems) {
+            if (item instanceof Boot) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public boolean hasBazooka () {
+        for (SpelItem item : spelItems) {
+            if (item instanceof Bazooka) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public boolean hasDestructable () {
+        for (SpelItem item : spelItems) {
+            if (item instanceof ZwakkeMuur) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
     public boolean hasVriend () {
         for (SpelItem item : spelItems) {
             if (item instanceof Vriend) {

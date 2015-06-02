@@ -21,16 +21,22 @@ public class Helper extends PowerUp {
     
     public Helper () {
         setImage(Spel.loadImage("helper.png"));
-        onbezochteVelden = new ArrayList<>();
-        bezochteVelden = new ArrayList<>();
     }
     
     @Override
     public void actie (Held held, Iterator iter) {
         this.held = held;
+        onbezochteVelden = new ArrayList<>();
+        bezochteVelden = new ArrayList<>();
         Veld start = getVeld();
         start.setAfstand(0);
         vulOnbezochteVelden(start);
+        if (einde == null) {
+            einde = vindBoot();
+        }
+        if (einde == null) {
+            einde = vindBazooka();
+        }
         if (vindRoute(start, einde)) {
             markeerRoute(einde);
         }
@@ -43,13 +49,30 @@ public class Helper extends PowerUp {
             Veld veld = huidigVeld.getNeighbour(richting);
             if (veld != null) {
                 if (veld.kanVerplaatsen(held) && !onbezochteVelden.contains(veld)) {
-                    onbezochteVelden.add(veld);
-                    vulOnbezochteVelden(veld);
+                    veld.isOnderdeelRoute(false);
                     if (veld.hasVriend())
                         einde = veld;
+                    onbezochteVelden.add(veld);
+                    vulOnbezochteVelden(veld);
                 }
             }
         }
+    }
+    
+    private Veld vindBoot () {
+        for (Veld veld : onbezochteVelden) {
+            if (veld.hasBoot())
+                return veld;
+        }
+        return null;
+    }
+    
+    private Veld vindBazooka () {
+        for (Veld veld : onbezochteVelden) {
+            if (veld.hasBazooka())
+                return veld;
+        }
+        return null;
     }
     
     private Veld vindLaagsteAfstand (ArrayList<Veld> velden) {
