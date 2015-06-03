@@ -18,7 +18,7 @@ public class Kogel extends SpelItem {
     private Richtingen richting;
 
     public Kogel(Richtingen richting) {
-        setImage(Spel.loadImage("cheater.png"));
+        setImage(Spel.loadImage("kogel.png"));
         this.richting = richting;
         startTimer();
     }
