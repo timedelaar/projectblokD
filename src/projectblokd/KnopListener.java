@@ -16,6 +16,8 @@ public class KnopListener implements MouseListener {
     private Knop knop;
     private Menu menu;
     private Doolhof doolhof;
+    private HelpMenu helpMenu;
+    private DoolhofMenu doolhofMenu;
     
     public KnopListener (Menu menu, Knop knop) {
         this.knop = knop;
@@ -26,11 +28,23 @@ public class KnopListener implements MouseListener {
         this.knop = knop;
         this.doolhof = doolhof;
     }
+    public KnopListener (HelpMenu helpmenu, Knop knop) {
+        this.knop = knop;
+        this.helpMenu = helpmenu;
+    }
+    public KnopListener (DoolhofMenu doolhofMenu, Knop knop) {
+        this.knop = knop;
+        this.doolhofMenu = doolhofMenu;
+    }
 
     @Override
     public void mouseClicked (MouseEvent e) {
         if (menu != null)
             menu.actie(knop);
+        else if (doolhofMenu != null)
+            doolhofMenu.actie(knop);
+        else if (helpMenu != null)
+            helpMenu.actie(knop);
         else if (doolhof != null)
             doolhof.opnieuwStarten();
     }

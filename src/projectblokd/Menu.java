@@ -20,6 +20,8 @@ public class Menu extends JPanel {
     private KnopListener startListener;
     private Knop exitKnop;
     private KnopListener exitListener;
+    private Knop helpKnop;
+    private KnopListener helpListener;
     
     private final int KNOP_WIDTH = 200;
     private final int KNOP_HEIGHT = (int) (KNOP_WIDTH * 0.3125);
@@ -28,6 +30,7 @@ public class Menu extends JPanel {
         setLayout(null);
         background = Spel.loadImage("menu_bg.png");
         maakStartKnop();
+        maakHelpKnop();
         maakExitKnop();
     }
     
@@ -35,16 +38,23 @@ public class Menu extends JPanel {
         startKnop = new Knop("start-sign.png", Knop.START);
         add(startKnop);
         startKnop.setSize(new Dimension(KNOP_WIDTH, KNOP_HEIGHT));
-        startKnop.setLocation(200, 175);
+        startKnop.setLocation(200, 75);
         startListener = new KnopListener(this, startKnop);
         startKnop.addMouseListener(startListener);
     }
-    
+    public final void maakHelpKnop(){
+        helpKnop = new Knop ("start-sign.png", Knop.HELP);
+        add(helpKnop);
+        helpKnop.setSize(new Dimension(KNOP_WIDTH, KNOP_HEIGHT));
+        helpKnop.setLocation(200, 250);
+        helpListener = new KnopListener(this, helpKnop);
+        helpKnop.addMouseListener(helpListener);
+    }
     public final void maakExitKnop () {
         exitKnop = new Knop("exit-sign.png", Knop.EXIT);
         add(exitKnop);
         exitKnop.setSize(new Dimension(KNOP_WIDTH, KNOP_HEIGHT));
-        exitKnop.setLocation(200, 300);
+        exitKnop.setLocation(200, 425);
         exitListener = new KnopListener(this, exitKnop);
         exitKnop.addMouseListener(exitListener);
     }
@@ -53,7 +63,11 @@ public class Menu extends JPanel {
         Spel spel = (Spel) getParent();
         if (knop.getActie() == Knop.START) {
             deleteKnoppen();
-            spel.startSpel();
+            spel.startSpel(); //spel.toonDoolhof werkt niet
+        }
+        else if (knop.getActie() == Knop.HELP){
+            deleteKnoppen();
+            spel.toonHelpMenu(); //werkt niet
         }
         else if (knop.getActie() == Knop.EXIT) {
             deleteKnoppen();
@@ -68,6 +82,9 @@ public class Menu extends JPanel {
         exitKnop.removeMouseListener(exitListener);
         exitListener = null;
         exitKnop = null;
+        helpKnop.removeMouseListener(helpListener);
+        helpListener = null;
+        helpKnop = null;
     }
     
     @Override

@@ -11,7 +11,6 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.net.URL;
 import javax.imageio.ImageIO;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
@@ -23,6 +22,8 @@ public class Spel extends JPanel {
     
     private Doolhof doolhof;
     private Menu menu;
+    private HelpMenu helpMenu;
+    private DoolhofMenu doolhofMenu;
     private int width;
     private int height;
     
@@ -40,16 +41,29 @@ public class Spel extends JPanel {
         toonMenu();
     }
     
-    private void toonMenu () {
+    public void toonMenu () {
         menu = new Menu();
         add(menu);
         menu.setPreferredSize(new Dimension(width, height));
     }
+    public void toonHelpMenu(){
+        remove(menu);
+        menu = null;
+        
+        helpMenu = new HelpMenu();
+        add(helpMenu);
+        helpMenu.setPreferredSize(new Dimension(width, height));
+        repaint();
+    }
     
-    private void startDoolhof () {
-        doolhof = new Doolhof(width, height);
-        doolhof.setPreferredSize(new Dimension(width, height));
-        add(doolhof);
+    public void toonDoolhofMenu () {
+        remove(menu);
+        menu = null;
+
+        doolhofMenu = new DoolhofMenu();
+        add(doolhofMenu);
+        doolhofMenu.setPreferredSize(new Dimension(width, height));
+        repaint();
     }
     
     public void startSpel () {
@@ -59,6 +73,12 @@ public class Spel extends JPanel {
         repaint();
     }
     
+    private void startDoolhof () {
+        doolhof = new Doolhof(width, height);
+        doolhof.setPreferredSize(new Dimension(width, height));
+        add(doolhof);
+    }
+    
     public void stopSpel () {
         System.out.println("gewonnen");
     }
@@ -66,7 +86,7 @@ public class Spel extends JPanel {
     public void opnieuwStarten () {
         System.out.println("reset doolhof");
     }
-    
+
     public void exit () {
         
     }
