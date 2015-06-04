@@ -22,9 +22,10 @@ public class HelpMenu extends JPanel {
     private final int KNOP_WIDTH = 200;
     private final int KNOP_HEIGHT = (int) (KNOP_WIDTH * 0.3125);
     
-    public HelpMenu (){
+    public HelpMenu () {
         setLayout(null);
         background = Spel.loadImage("menu_bg.png");
+        maakTerugKnop();
     }
     
     public final void maakTerugKnop () {
@@ -37,21 +38,14 @@ public class HelpMenu extends JPanel {
     }
     
     public void actie (Knop knop) {
-        Spel spel = (Spel) getParent();
+        Spel spel = (Spel) getParent().getParent();
         if (knop.getActie() == Knop.TERUG) {
-            deleteKnoppen();
             spel.toonMenu();
         }
     }
     
-    private void deleteKnoppen () {
-        terugKnop.removeMouseListener(terugListener);
-        terugListener = null;
-        terugKnop = null;
-    }
-    
-    @Override 
-    public void paintComponent(Graphics g){
+    @Override
+    public void paintComponent (Graphics g) {
         g.drawImage(background, 0, 0, this);
     }
 }

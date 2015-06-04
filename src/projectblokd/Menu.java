@@ -60,31 +60,16 @@ public class Menu extends JPanel {
     }
     
     public void actie (Knop knop) {
-        Spel spel = (Spel) getParent();
+        Spel spel = (Spel) getParent().getParent();
         if (knop.getActie() == Knop.START) {
-            deleteKnoppen();
-            spel.startSpel(); //spel.toonDoolhof werkt niet
+            spel.toonDoolhofMenu();
         }
         else if (knop.getActie() == Knop.HELP){
-            deleteKnoppen();
-            spel.toonHelpMenu(); //werkt niet
+            spel.toonHelpMenu();
         }
         else if (knop.getActie() == Knop.EXIT) {
-            deleteKnoppen();
             spel.exit();
         }
-    }
-    
-    private void deleteKnoppen () {
-        startKnop.removeMouseListener(startListener);
-        startListener = null;
-        startKnop = null;
-        exitKnop.removeMouseListener(exitListener);
-        exitListener = null;
-        exitKnop = null;
-        helpKnop.removeMouseListener(helpListener);
-        helpListener = null;
-        helpKnop = null;
     }
     
     @Override

@@ -4,10 +4,7 @@
  */
 package projectblokd;
 
-import java.awt.AlphaComposite;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.net.URL;
 import javax.imageio.ImageIO;
@@ -26,57 +23,59 @@ public class Spel extends JPanel {
     private DoolhofMenu doolhofMenu;
     private int width;
     private int height;
+    private JPanel menus;
     
     public Spel (int width, int height) {
         this.width = width;
         this.height = height;
+        setSize(width, height);
         init();
     }
     
     private void init () {
         FlowLayout layout = (FlowLayout) getLayout();
-        layout.setVgap(0);
         layout.setHgap(0);
+        layout.setVgap(0);
         setLayout(layout);
+        createMenus();
         toonMenu();
     }
     
-    public void toonMenu () {
+    public void createMenus () {
         menu = new Menu();
-        add(menu);
         menu.setPreferredSize(new Dimension(width, height));
-    }
-    public void toonHelpMenu(){
-        remove(menu);
-        menu = null;
-        
         helpMenu = new HelpMenu();
-        add(helpMenu);
         helpMenu.setPreferredSize(new Dimension(width, height));
-        repaint();
+        doolhofMenu = new DoolhofMenu();
+        doolhofMenu.setPreferredSize(new Dimension(width, height));
+        
+        menus = new JPanel(new CardLayout());
+        menus.add(menu, "hoofdmenu");
+        menus.add(helpMenu, "helpmenu");
+        menus.add(doolhofMenu, "doolhofmenu");
+        add(menus);
+    }
+    
+    public void toonMenu () {
+        CardLayout cl = (CardLayout) menus.getLayout();
+        cl.show(menus, "hoofdmenu");
+    }
+    
+    public void toonHelpMenu(){
+        CardLayout cl = (CardLayout) menus.getLayout();
+        cl.show(menus, "helpmenu");
     }
     
     public void toonDoolhofMenu () {
-        remove(menu);
-        menu = null;
-
-        doolhofMenu = new DoolhofMenu();
-        add(doolhofMenu);
-        doolhofMenu.setPreferredSize(new Dimension(width, height));
-        repaint();
+        CardLayout cl = (CardLayout) menus.getLayout();
+        cl.show(menus, "doolhofmenu");
     }
     
     public void startSpel () {
-        remove(menu);
-        menu = null;
-        startDoolhof();
-        repaint();
-    }
-    
-    private void startDoolhof () {
-        doolhof = new Doolhof(width, height);
-        doolhof.setPreferredSize(new Dimension(width, height));
-        add(doolhof);
+        doolhof = new Doolhof(width, height, "maze1");
+        menus.add(doolhof, "doolhof");
+        CardLayout cl = (CardLayout) menus.getLayout();
+        cl.show(menus, "doolhof");
     }
     
     public void stopSpel () {

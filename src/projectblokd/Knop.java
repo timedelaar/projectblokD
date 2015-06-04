@@ -19,9 +19,9 @@ public class Knop extends JComponent {
     public static final int EXIT = 2;
     public static final int HELP = 3;
     public static final int TERUG = 4;
-    public static final int MAZE1 = 4;
-    public static final int MAZE2 = 5;
-    public static final int MAZE3 = 6;
+    public static final int MAZE1 = 5;
+    public static final int MAZE2 = 6;
+    public static final int MAZE3 = 7;
     
     private BufferedImage image;
     private int actie;

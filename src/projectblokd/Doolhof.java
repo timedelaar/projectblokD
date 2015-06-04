@@ -10,6 +10,10 @@ import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import javax.swing.*;
 
 /**
@@ -39,7 +43,7 @@ public class Doolhof extends JPanel {
      * 9 = water
      * 10 = boot
      */
-    private int[][] doolhofLayout = {{7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7},
+    /*private int[][] doolhofLayout = {{7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7},
                                      {7, 2, 1, 1, 1, 1, 1, 1, 1, 1, 6, 0, 0, 0, 0, 0, 0, 0, 1, 7},
                                      {7, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 7},
                                      {7, 8, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 7},
@@ -58,13 +62,22 @@ public class Doolhof extends JPanel {
                                      {7, 1, 4, 1, 5, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 9, 8, 8, 1, 7},
                                      {7, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 9, 1, 3, 1, 7},
                                      {7, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 7},
-                                     {7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7}};
+                                     {7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7}};*/
+    
+    private int[][] doolhofLayout;
     
     private final int CHEATER_WAARDE = 10;
     
-    public Doolhof (int width, int height) {
+    public Doolhof (int width, int height, String maze) {
         this.width = width;
         this.height = height;
+        try {
+            ObjectInputStream inStream = new ObjectInputStream(new FileInputStream(maze + ".txt"));
+            doolhofLayout = (int[][]) inStream.readObject();
+        }
+        catch (Exception e) {
+            System.out.println("e");
+        }
         init();
         maakScoreBoard();
         addResetKnop();

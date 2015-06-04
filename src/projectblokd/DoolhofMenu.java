@@ -35,7 +35,7 @@ public class DoolhofMenu extends JPanel {
     }
 
     public final void maakMaze1Knop() {
-        maze1Knop = new Knop("maze1-sign.png", Knop.START);
+        maze1Knop = new Knop("maze1-sign.png", Knop.MAZE1);
         add(maze1Knop);
         maze1Knop.setSize(new Dimension(KNOP_WIDTH, KNOP_HEIGHT));
         maze1Knop.setLocation(200, 75);
@@ -44,7 +44,7 @@ public class DoolhofMenu extends JPanel {
     }
 
     public final void maakMaze2Knop() {
-        maze3Knop = new Knop("maze2-sign.png", Knop.HELP);
+        maze3Knop = new Knop("maze2-sign.png", Knop.MAZE2);
         add(maze3Knop);
         maze3Knop.setSize(new Dimension(KNOP_WIDTH, KNOP_HEIGHT));
         maze3Knop.setLocation(200, 250);
@@ -53,7 +53,7 @@ public class DoolhofMenu extends JPanel {
     }
 
     public final void maakMaze3Knop() {
-        maze2Knop = new Knop("maze3-sign.png", Knop.EXIT);
+        maze2Knop = new Knop("maze3-sign.png", Knop.MAZE3);
         add(maze2Knop);
         maze2Knop.setSize(new Dimension(KNOP_WIDTH, KNOP_HEIGHT));
         maze2Knop.setLocation(200, 425);
@@ -62,7 +62,7 @@ public class DoolhofMenu extends JPanel {
     }
 
     public void actie(Knop knop) {
-        Spel spel = (Spel) getParent();
+        Spel spel = (Spel) getParent().getParent();
         if (knop.getActie() == Knop.MAZE1) {
             deleteKnoppen();
             spel.startSpel();
