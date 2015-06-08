@@ -32,7 +32,10 @@ public class Doolhof extends JPanel {
     JLabel scoreLabel;
     private int score;
     
-    /* 1 = zwakke muur
+    /* Dit is de 2D array om alle objecten een nummer/waarde toe te kennen
+     * De daadwerkelijke doolhof wordt in de methode maakDoolhof gemaakt.
+
+     * 1 = zwakke muur
      * 2 = held
      * 3 = vriend
      * 4 = cheater
@@ -96,6 +99,10 @@ public class Doolhof extends JPanel {
         VELD_SIZE = width / doolhofLayout.length;
     }
     
+    /*
+     * De methode maakScoreboard wordt er een image gemaakt met timer bovenop getekend
+     * Hierbij is een JLabel gebruikt en is er wat positionering toegepast
+     */
     private void maakScoreBoard () {
         BufferedImage image = ImageStorage.get().getImage("sign.png");
         image = ImageStorage.get().resizeImage("score-sign", image, 100, 25);
@@ -117,6 +124,11 @@ public class Doolhof extends JPanel {
         resetKnop.setLocation(500, 2);
         resetKnop.addMouseListener(new KnopListener(this, resetKnop));
     }
+    
+    /*
+     * De methode opnieuwstarten roept de class Spel (door twee niveaus omhoog te gaan)
+     * In spel wordt weer de methode opnieuwStarten aangeroepen
+     */
     
     public void opnieuwStarten () {
         Spel spel = (Spel) getParent().getParent();
@@ -155,12 +167,23 @@ public class Doolhof extends JPanel {
         }
     }
     
+    /*
+     * Zodra de methode addSpelItem de held toevoegt, wordt startKeyBoardListener aangeroepen
+     */
     private void startKeyBoardListener (Held held) {
         setFocusable(true);
         KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
         KeyBoardListener KBListener = new KeyBoardListener(held);
         manager.addKeyEventDispatcher(KBListener);
     }
+    
+    /*
+     * In de method maakDoolhof wordt er eerst een nieuwe 2d array van de class veld gemaakt 
+     * Hierin wordt de private attribuut doolhofLayout mee gevuld
+     * Doormiddel van de twee for-loops wordt er per waarde:
+     * 1. Veld toegevoegt
+     * 2. Ingelezen of het veld een spelItem nodig/nietnodig heeft
+     */
     
     private void maakDoolhof () {
         Veld[][] velden = new Veld[doolhofLayout.length][doolhofLayout.length];
@@ -174,6 +197,10 @@ public class Doolhof extends JPanel {
         voegBurenToe(velden);
     }
     
+    /*
+     * Aanvulling van de methode maakDoolhof: Door de x en y variabelen in de twee forloops 
+     * in de methode maakDoolhof kan er elke keer een veld toegevoegd worden
+     */
     private Veld addVeld (int x, int y) {
         int xCord = x * VELD_SIZE;
         int yCord = y * VELD_SIZE;
@@ -231,7 +258,10 @@ public class Doolhof extends JPanel {
             veld.addSpelItem(sterkeMuur);
         }
     }
-    
+    /*
+     * Wanneer de velden zijn toegevoegd in methode maakDoolhof worden de richtingen:
+     * Noord, Zuid, West en Oost per veld toegekend 
+     */
     private void voegBurenToe (Veld[][] velden) {
         for (int y = 0; y < velden.length; y++) {
             for (int x = 0; x < velden[y].length; x++) {

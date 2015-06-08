@@ -17,7 +17,11 @@ public class Bazooka extends PowerUp {
     public Bazooka () {
         setImage("bazooka.png");
     }
-
+    /*
+     * Methode schiet wordt door held aangeroepen.
+     * In de methode wordt er een nieuwe kogel gemaakt met de richting waar de held naartoe is gericht
+     * De kogel wordt vervolgens toegevoegd op de veld
+     */
     public void schiet (Richtingen richting) {
         Kogel kogel = new Kogel(richting);
         held.getVeld().addSpelItem(kogel);

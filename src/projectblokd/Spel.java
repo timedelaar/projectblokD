@@ -84,6 +84,7 @@ public class Spel extends JPanel {
     }
 
     public void exit () {
-        
+        MainFrame frame = (MainFrame) getParent().getParent().getParent().getParent().getParent();
+        frame.exit();
     }
 }

@@ -35,7 +35,12 @@ public class Held extends SpelItem {
             bazooka = null;
         }
     }
-    
+    /*
+     * De richting is het laatste richting die de held is geweest
+     * Diezelfde richting wordt toegekend aan de neighbourveld
+     * Als de volgende veld niet leeg is, wordt er gecontroleert of de nieuweveld water is
+     * Zo niet, wordt er gecontroleert of de 
+     */
     public void verplaats (Richtingen richting) {
         laatsteRichting = richting;
         Veld huidigVeld = getVeld();

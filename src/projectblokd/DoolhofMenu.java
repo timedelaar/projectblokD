@@ -60,7 +60,10 @@ public class DoolhofMenu extends JPanel {
         maze2Listener = new KnopListener(this, maze2Knop);
         maze2Knop.addMouseListener(maze2Listener);
     }
-
+    /*
+     * Wanneer een van de drie knoppen in de doolhofMenu wordt gedrukt, verwijdert het alle knoppen en listeners
+     * Vervolgens wordt de spel gestart
+     */
     public void actie(Knop knop) {
         Spel spel = (Spel) getParent().getParent();
         if (knop.getActie() == Knop.MAZE1) {

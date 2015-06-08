@@ -39,5 +39,8 @@ public class MainFrame extends JFrame {
         
         add(panel);
     }
+    public void exit (){
+        this.dispose();
+    }
     
 }
