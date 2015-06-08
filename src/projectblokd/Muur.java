@@ -36,7 +36,7 @@ public class Muur extends SpelItem {
     }
 
     @Override
-    public void destroy (Iterator iter) {
+    public void destroy (Iterator<SpelItem> iter) {
         sterkte --;
         if (sterkte == 1) {
             setImage("zwakke-muur.png");

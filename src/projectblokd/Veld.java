@@ -79,17 +79,17 @@ public class Veld extends JComponent {
     }
     
     public void destroySpelItems () {
-        Iterator iter = spelItems.iterator();
+        Iterator<SpelItem> iter = spelItems.iterator();
         while (iter.hasNext()) {
-            SpelItem item = (SpelItem) iter.next();
+            SpelItem item = iter.next();
             item.destroy(iter);
         }
     }
     
     public void powerUp (Held held) {
-        Iterator iter = spelItems.iterator();
+        Iterator<SpelItem> iter = spelItems.iterator();
         while (iter.hasNext()) {
-            SpelItem item = (SpelItem) iter.next();
+            SpelItem item = iter.next();
             item.actie(held, iter);
         }
     }

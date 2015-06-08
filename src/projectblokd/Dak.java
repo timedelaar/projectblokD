@@ -30,6 +30,6 @@ public class Dak extends SpelItem {
     }
 
     @Override
-    public void destroy (Iterator iter) {
+    public void destroy (Iterator<SpelItem> iter) {
     }
 }

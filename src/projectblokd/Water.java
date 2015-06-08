@@ -18,12 +18,18 @@ public class Water extends SpelItem {
 
     @Override
     public boolean kanVerplaatsen (Held held) {
-        if (held.hasBoot()) {
-            return true;
+        try {
+            if (held.hasBoot()) {
+                return true;
+            }
+            else {
+                return false;
+            }
         }
-        else {
-            return false;
+        catch (Exception e) {
+            System.out.println(e);
         }
+        return false;
     }
 
     @Override
@@ -36,7 +42,7 @@ public class Water extends SpelItem {
     }
 
     @Override
-    public void destroy (Iterator iter) {
+    public void destroy (Iterator<SpelItem> iter) {
     }
     
 }

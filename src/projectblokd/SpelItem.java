@@ -52,7 +52,7 @@ public abstract class SpelItem implements Comparable {
     
     public abstract void destroy ();
     
-    public abstract void destroy (Iterator iter);
+    public abstract void destroy (Iterator<SpelItem> iter);
     
     public void actie (Held held, Iterator iter){}
     
