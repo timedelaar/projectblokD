@@ -20,7 +20,7 @@ public class Helper extends PowerUp {
     private Veld einde;
     
     public Helper () {
-        setImage(Spel.loadImage("helper.png"));
+        setImage("helper.png");
     }
     
     @Override

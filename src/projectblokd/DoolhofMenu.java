@@ -28,7 +28,7 @@ public class DoolhofMenu extends JPanel {
 
     public DoolhofMenu() {
         setLayout(null);
-        background = Spel.loadImage("menu_bg.png");
+        background = ImageStorage.get().getImage("menu_bg.png");
         maakMaze1Knop();
         maakMaze2Knop();
         maakMaze3Knop();

@@ -16,7 +16,7 @@ public class Vriend extends SpelItem {
     
     public Vriend (Doolhof doolhof) {
         this.doolhof = doolhof;
-        setImage(Spel.loadImage("vriend.png"));
+        setImage("vriend.png");
     }
     
     public void stopSpel () {

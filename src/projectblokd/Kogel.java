@@ -19,7 +19,7 @@ public class Kogel extends SpelItem {
     private Richtingen richting;
 
     public Kogel(Richtingen richting) {
-        setImage(Spel.loadImage("kogel.png"));
+        setImage("kogel.png");
         this.richting = richting;
         startTimer();
     }

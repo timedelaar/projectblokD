@@ -5,9 +5,6 @@
 package projectblokd;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.net.URL;
-import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 /**
@@ -88,35 +85,5 @@ public class Spel extends JPanel {
 
     public void exit () {
         
-    }
-    
-    public static BufferedImage loadImage (String ref) {
-        BufferedImage image = null;
-        try {
-            URL url = Spel.class.getClassLoader().getResource("images/" + ref);
-            image = ImageIO.read(url);
-        }
-        catch (Exception e) {
-            System.out.println(e);
-        }
-        return image;
-    }
-    
-    public static BufferedImage resizeImage (BufferedImage image, int width, int height) {
-        BufferedImage resizedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g2 = resizedImage.createGraphics();
-        g2.drawImage(image, 0, 0, width, height, null);
-        g2.dispose();
-        return resizedImage;
-    }
-    
-    public static BufferedImage addTransparency (BufferedImage image, float t) {
-        BufferedImage newImage = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g2 = newImage.createGraphics();
-        AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, t);
-        g2.setComposite(ac);
-        g2.drawImage(image, 0, 0, null);
-        g2.dispose();
-        return newImage;
     }
 }

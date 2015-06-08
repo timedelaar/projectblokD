@@ -28,7 +28,7 @@ public class Menu extends JPanel {
     
     public Menu () {
         setLayout(null);
-        background = Spel.loadImage("menu_bg.png");
+        background = ImageStorage.get().getImage("menu_bg.png");
         maakStartKnop();
         maakHelpKnop();
         maakExitKnop();

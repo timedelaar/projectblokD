@@ -13,7 +13,7 @@ import java.util.Iterator;
 public class ZwakkeMuur extends Muur {
     
     public ZwakkeMuur () {
-        setImage(Spel.loadImage("muur.png"));
+        setImage("muur.png");
     }
     
     public void destroy (Iterator iter) {

@@ -15,7 +15,7 @@ public class Muur extends SpelItem {
     private int sterkte = Integer.MAX_VALUE;
 
     public Muur() {
-        setImage(Spel.loadImage("muur-rand.png"));
+        setImage("muur-rand.png");
     }
     
     public boolean kanVerplaatsen (Held held) {

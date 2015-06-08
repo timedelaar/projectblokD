@@ -24,7 +24,7 @@ public class HelpMenu extends JPanel {
     
     public HelpMenu () {
         setLayout(null);
-        background = Spel.loadImage("menu_bg.png");
+        background = ImageStorage.get().getImage("menu_bg.png");
         maakTerugKnop();
     }
     

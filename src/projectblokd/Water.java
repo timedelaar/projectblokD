@@ -13,7 +13,7 @@ import java.util.Iterator;
 public class Water extends SpelItem {
     
     public Water () {
-        setImage(Spel.loadImage("water.png"));
+        setImage("water.png");
     }
 
     @Override

@@ -23,8 +23,8 @@ public class Held extends SpelItem {
     private Richtingen laatsteRichting;
     
     public Held () {
-        lopend = Spel.loadImage("held.png");
-        varend = Spel.loadImage("varende-held.png");
+        lopend = ImageStorage.get().getImage("held.png");
+        varend = ImageStorage.get().getImage("varende-held.png");
         setImage(lopend);
         setDrawPriority(15);
     }

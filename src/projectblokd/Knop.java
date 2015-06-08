@@ -27,7 +27,7 @@ public class Knop extends JComponent {
     private int actie;
     
     public Knop (String ref, int actie) {
-        image = Spel.loadImage(ref);
+        image = ImageStorage.get().getImage(ref);
         this.actie = actie;
     }
     

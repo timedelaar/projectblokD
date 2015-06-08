@@ -30,11 +30,11 @@ public class Veld extends JComponent {
         buren = new HashMap<>();
         spelItems = new PriorityQueue<>();
         
-        setImage(ImageStorage.get().getImage("veld.png"));
+        setImage("veld.png");
     }
     
-    public final void setImage (BufferedImage image) {
-        this.image = image;
+    public final void setImage (String ref) {
+        this.image = ImageStorage.get().getImage(ref);
     }
     
     public void setNeighbour (Richtingen richting, Veld veld) {

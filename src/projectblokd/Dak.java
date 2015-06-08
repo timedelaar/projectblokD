@@ -4,7 +4,6 @@
  */
 package projectblokd;
 
-import java.awt.image.BufferedImage;
 import java.util.Iterator;
 
 /**
@@ -14,8 +13,7 @@ import java.util.Iterator;
 public class Dak extends SpelItem {
     
     public Dak() {
-        BufferedImage newImage = Spel.addTransparency(ImageStorage.get().getImage("muur.png"), 0.55f);
-        setImage(newImage);
+        setImage("dak.png");
         setDrawPriority(14);
     }
     

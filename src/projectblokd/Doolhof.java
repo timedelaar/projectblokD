@@ -95,8 +95,8 @@ public class Doolhof extends JPanel {
     }
     
     private void maakScoreBoard () {
-        BufferedImage image = Spel.loadImage("sign.png");
-        image = Spel.resizeImage(image, 100, 25);
+        BufferedImage image = ImageStorage.get().getImage("sign.png");
+        image = ImageStorage.get().resizeImage("score-sign", image, 100, 25);
         scoreLabel = new JLabel("tijd: 00:00", new ImageIcon(image), SwingConstants.LEFT);
         scoreLabel.setHorizontalTextPosition(JLabel.CENTER);
         scoreLabel.setVerticalTextPosition(JLabel.CENTER);
