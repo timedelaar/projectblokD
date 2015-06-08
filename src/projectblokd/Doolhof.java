@@ -21,7 +21,7 @@ import javax.swing.*;
  * @author Tim
  */
 public class Doolhof extends JPanel {
-    // undo branch
+    
     
     private int width;
     private int height;
