@@ -4,6 +4,8 @@
  */
 package projectblokd;
 
+import java.util.Iterator;
+
 /**
  *
  * @author Tim
@@ -27,6 +29,14 @@ public class Water extends SpelItem {
     @Override
     public boolean kanVerplaatsen (Kogel kogel) {
         return true;
+    }
+
+    @Override
+    public void destroy () {
+    }
+
+    @Override
+    public void destroy (Iterator iter) {
     }
     
 }

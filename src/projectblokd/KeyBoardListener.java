@@ -22,7 +22,7 @@ public class KeyBoardListener implements KeyEventDispatcher {
     @Override
     public boolean dispatchKeyEvent (KeyEvent e) {
         if (e.getID() == KeyEvent.KEY_PRESSED) {
-            if (e.getKeyCode() == 37) {
+            if (e.getKeyCode() == KeyEvent.VK_LEFT) {
                 held.verplaats(Richtingen.WEST);
             }
             else if (e.getKeyCode() == 38) {

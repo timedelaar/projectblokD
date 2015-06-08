@@ -25,4 +25,14 @@ public abstract class PowerUp extends SpelItem {
     public boolean kanVerplaatsen (Kogel kogel) {
         return true;
     }
+    
+    @Override
+    public void destroy () {
+        
+    }
+    
+    @Override
+    public void destroy (Iterator iter) {
+        
+    }
 }

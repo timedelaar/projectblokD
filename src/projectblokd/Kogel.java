@@ -6,6 +6,7 @@ package projectblokd;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Iterator;
 import javax.swing.Timer;
 
 /**
@@ -67,5 +68,13 @@ public class Kogel extends SpelItem {
     
     public boolean kanVerplaatsen (Kogel kogel) {
         return true;
+    }
+
+    @Override
+    public void destroy () {
+    }
+
+    @Override
+    public void destroy (Iterator iter) {
     }
 }

@@ -5,6 +5,7 @@
 package projectblokd;
 
 import java.awt.image.BufferedImage;
+import java.util.Iterator;
 
 
 /**
@@ -88,5 +89,13 @@ public class Held extends SpelItem {
     
     public boolean kanVerplaatsen (Kogel kogel) {
         return true;
+    }
+
+    @Override
+    public void destroy () {
+    }
+
+    @Override
+    public void destroy (Iterator iter) {
     }
 }

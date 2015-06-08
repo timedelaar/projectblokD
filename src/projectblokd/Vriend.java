@@ -4,6 +4,8 @@
  */
 package projectblokd;
 
+import java.util.Iterator;
+
 /**
  *
  * @author Tim
@@ -27,5 +29,13 @@ public class Vriend extends SpelItem {
     
     public boolean kanVerplaatsen (Kogel kogel) {
         return true;
+    }
+
+    @Override
+    public void destroy () {
+    }
+
+    @Override
+    public void destroy (Iterator iter) {
     }
 }
