@@ -18,6 +18,10 @@ public class Muur extends SpelItem {
         setImage("muur-rand.png");
     }
     
+    public void setSterkte (int sterkte) {
+        this.sterkte = sterkte;
+    }
+    
     public boolean kanVerplaatsen (Held held) {
         return false;
     }
@@ -34,7 +38,10 @@ public class Muur extends SpelItem {
     @Override
     public void destroy (Iterator iter) {
         sterkte --;
-        if (sterkte == 0) {
+        if (sterkte == 1) {
+            setImage("zwakke-muur.png");
+        }
+        else if (sterkte == 0) {
             iter.remove();
         }
     }

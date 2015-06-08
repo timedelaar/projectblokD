@@ -8,10 +8,10 @@ package projectblokd;
  *
  * @author Tim
  */
-public class ZwakkeMuur extends Muur {
+public class SterkeMuur extends Muur {
     
-    public ZwakkeMuur () {
-        setImage("zwakke-muur.png");
-        setSterkte(1);
+    public SterkeMuur () {
+        setImage("muur.png");
+        setSterkte(2);
     }
 }
