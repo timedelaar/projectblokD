@@ -18,7 +18,7 @@ public class Cheater extends PowerUp {
     public Cheater (int waarde, Doolhof doolhof) {
         this.waarde = waarde;
         this.doolhof = doolhof;
-        setImage(Spel.loadImage("cheater.png"));
+        setImage("cheater.png");
     }
 
     @Override

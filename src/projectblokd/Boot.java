@@ -13,7 +13,7 @@ import java.util.Iterator;
 public class Boot extends PowerUp {
     
     public Boot () {
-        setImage(Spel.loadImage("boot.png"));
+        setImage("boot.png");
     }
 
     @Override

@@ -13,8 +13,7 @@ import java.awt.image.BufferedImage;
 public class Dak extends SpelItem {
     
     public Dak() {
-        setImage(Spel.loadImage("muur.png"));
-        BufferedImage newImage = Spel.addTransparency(getImage(), 0.55f);
+        BufferedImage newImage = Spel.addTransparency(ImageStorage.get().getImage("muur.png"), 0.55f);
         setImage(newImage);
         setDrawPriority(14);
     }

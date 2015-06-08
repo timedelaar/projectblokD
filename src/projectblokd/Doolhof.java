@@ -81,7 +81,11 @@ public class Doolhof extends JPanel {
         init();
         maakScoreBoard();
         addResetKnop();
+        long time = System.currentTimeMillis();
+        System.out.println("Start");
         maakDoolhof();
+        time = System.currentTimeMillis() - time;
+        System.out.println("Done in " + time + "ms");
         startScoreTimer();
     }
     
@@ -113,7 +117,8 @@ public class Doolhof extends JPanel {
     }
     
     public void opnieuwStarten () {
-        System.out.println("reset");
+        Spel spel = (Spel) getParent().getParent();
+        spel.opnieuwStarten();
     }
     
     private void startScoreTimer () {

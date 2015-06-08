@@ -29,7 +29,8 @@ public class Veld extends JComponent {
     public Veld () {
         buren = new HashMap<>();
         spelItems = new PriorityQueue<>();
-        setImage(Spel.loadImage("veld.png"));
+        
+        setImage(ImageStorage.get().getImage("veld.png"));
     }
     
     public final void setImage (BufferedImage image) {
