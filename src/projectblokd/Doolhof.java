@@ -76,7 +76,7 @@ public class Doolhof extends JPanel {
             doolhofLayout = (int[][]) inStream.readObject();
         }
         catch (Exception e) {
-            System.out.println("e");
+            System.out.println(e);
         }
         init();
         maakScoreBoard();
