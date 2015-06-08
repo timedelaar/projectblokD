@@ -93,7 +93,12 @@ public class Doolhof extends JPanel {
     
     private void init () {
         setLayout(null);
-        VELD_SIZE = width / doolhofLayout.length;
+        if (width <= height) {
+            VELD_SIZE = width / doolhofLayout.length;
+        }
+        else {
+            VELD_SIZE = height / doolhofLayout.length;
+        }
     }
     
     private void maakScoreBoard () {
