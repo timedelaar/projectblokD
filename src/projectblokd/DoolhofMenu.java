@@ -64,11 +64,11 @@ public class DoolhofMenu extends JPanel {
     public void actie(Knop knop) {
         Spel spel = (Spel) getParent().getParent();
         if (knop.getActie() == Knop.MAZE1) {
-            spel.startSpel();
+            spel.startSpel("maze1");
         } else if (knop.getActie() == Knop.MAZE2) {
-            //start doolhof2
+            spel.startSpel("maze2");
         } else if (knop.getActie() == Knop.MAZE3) {
-            //start doolhof3
+            spel.startSpel("maze3");
         }
     }
 

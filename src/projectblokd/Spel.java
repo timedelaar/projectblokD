@@ -69,9 +69,9 @@ public class Spel extends JPanel {
         cl.show(menus, "doolhofmenu");
     }
     
-    public void startSpel () {
+    public void startSpel (String maze) {
         startKeyBoardListener();
-        doolhof = new Doolhof(width, height, "maze1", KBListener);
+        doolhof = new Doolhof(width, height, maze, KBListener);
         menus.add(doolhof, "doolhof");
         CardLayout cl = (CardLayout) menus.getLayout();
         cl.show(menus, "doolhof");
@@ -87,9 +87,9 @@ public class Spel extends JPanel {
         menus.remove(doolhof);
     }
     
-    public void opnieuwStarten () {
+    public void opnieuwStarten (String maze) {
         menus.remove(doolhof);
-        startSpel();
+        startSpel(maze);
     }
 
     public void exit () {

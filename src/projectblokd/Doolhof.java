@@ -26,6 +26,7 @@ public class Doolhof extends JPanel {
     private int width;
     private int height;
     private int VELD_SIZE;
+    private String currentMaze;
     
     private Knop resetKnop;
     
@@ -45,7 +46,7 @@ public class Doolhof extends JPanel {
      * 10 = boot
      * 11 = sterke muur
      */
-    private int[][] doolhofLayout = {{ 7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7},
+    private int[][] defaultLayout = {{ 7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7},
                                      { 7,  2, 11, 11, 11, 11, 11, 11, 11, 11,  6,  0,  0,  0,  0,  0,  0,  0, 11,  7},
                                      { 7,  0,  0,  0,  0,  0, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11,  0, 11,  7},
                                      { 7,  8, 11, 11, 11,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0, 11,  7},
@@ -66,21 +67,22 @@ public class Doolhof extends JPanel {
                                      { 7, 11,  0,  0,  0,  0,  0,  0,  0, 11,  0,  0,  0,  0,  0,  0,  0, 11, 11,  7},
                                      { 7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7}};
     
-    //private int[][] doolhofLayout;
+    private int[][] doolhofLayout;
     
     private final int CHEATER_WAARDE = 10;
     
     public Doolhof (int width, int height, String maze, KeyBoardListener KBListener) {
         this.width = width;
         this.height = height;
-        /*
+        currentMaze = maze;
         try {
             ObjectInputStream inStream = new ObjectInputStream(new FileInputStream(maze + ".txt"));
             doolhofLayout = (int[][]) inStream.readObject();
         }
         catch (Exception e) {
             System.out.println(e);
-        }*/
+            doolhofLayout = defaultLayout;
+        }
         init();
         maakScoreBoard();
         addResetKnop();
@@ -126,7 +128,7 @@ public class Doolhof extends JPanel {
     
     public void opnieuwStarten () {
         Spel spel = (Spel) getParent().getParent();
-        spel.opnieuwStarten();
+        spel.opnieuwStarten(currentMaze);
     }
     
     private void startScoreTimer () {
