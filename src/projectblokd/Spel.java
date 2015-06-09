@@ -21,6 +21,7 @@ public class Spel extends JPanel {
     private int width;
     private int height;
     private JPanel menus;
+    private KeyBoardListener KBListener;
     
     public Spel (int width, int height) {
         this.width = width;
@@ -69,7 +70,8 @@ public class Spel extends JPanel {
     }
     
     public void startSpel () {
-        doolhof = new Doolhof(width, height, "maze1");
+        startKeyBoardListener();
+        doolhof = new Doolhof(width, height, "maze1", KBListener);
         menus.add(doolhof, "doolhof");
         CardLayout cl = (CardLayout) menus.getLayout();
         cl.show(menus, "doolhof");
@@ -80,10 +82,25 @@ public class Spel extends JPanel {
     }
     
     public void opnieuwStarten () {
-        System.out.println("reset doolhof");
+        menus.remove(doolhof);
+        repaint();
+        startSpel();
     }
 
     public void exit () {
         
+    }
+    
+    private void startKeyBoardListener () {
+        if (KBListener == null) {
+            setFocusable(true);
+            KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
+            KBListener = new KeyBoardListener();
+            manager.addKeyEventDispatcher(KBListener);
+        }
+    }
+    
+    public KeyBoardListener getKBListener () {
+        return KBListener;
     }
 }

@@ -15,7 +15,15 @@ public class KeyBoardListener implements KeyEventDispatcher {
     
     Held held;
     
+    public KeyBoardListener () {
+        
+    }
+    
     public KeyBoardListener (Held held) {
+        this.held = held;
+    }
+    
+    public void setHeld (Held held) {
         this.held = held;
     }
 

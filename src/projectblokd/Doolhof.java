@@ -70,7 +70,7 @@ public class Doolhof extends JPanel {
     
     private final int CHEATER_WAARDE = 10;
     
-    public Doolhof (int width, int height, String maze) {
+    public Doolhof (int width, int height, String maze, KeyBoardListener KBListener) {
         this.width = width;
         this.height = height;
         /*
@@ -86,7 +86,7 @@ public class Doolhof extends JPanel {
         addResetKnop();
         long time = System.currentTimeMillis();
         System.out.println("Start");
-        maakDoolhof();
+        maakDoolhof(KBListener);
         time = System.currentTimeMillis() - time;
         System.out.println("Done in " + time + "ms");
         startScoreTimer();
@@ -161,19 +161,12 @@ public class Doolhof extends JPanel {
         }
     }
     
-    private void startKeyBoardListener (Held held) {
-        setFocusable(true);
-        KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
-        KeyBoardListener KBListener = new KeyBoardListener(held);
-        manager.addKeyEventDispatcher(KBListener);
-    }
-    
-    private void maakDoolhof () {
+    private void maakDoolhof (KeyBoardListener KBListener) {
         Veld[][] velden = new Veld[doolhofLayout.length][doolhofLayout.length];
         for (int y = 0; y < doolhofLayout.length; y++) {
             for (int x = 0; x < doolhofLayout[y].length; x++) {
                 Veld veld = addVeld(x, y);
-                addSpelItem(veld, doolhofLayout[y][x]);
+                addSpelItem(veld, doolhofLayout[y][x], KBListener);
                 velden[y][x] = veld;
             }
         }
@@ -190,15 +183,15 @@ public class Doolhof extends JPanel {
         return veld;
     }
     
-    private void addSpelItem (Veld veld, int item) {
+    private void addSpelItem (Veld veld, int item, KeyBoardListener KBListener) {
         if (item == 1) {
             ZwakkeMuur muur = new ZwakkeMuur();
             veld.addSpelItem(muur);
         }
         else if (item == 2) {
             Held held = new Held();
+            KBListener.setHeld(held);
             veld.addSpelItem(held);
-            startKeyBoardListener(held);
         }
         else if (item == 3) {
             Vriend vriend = new Vriend(this);
@@ -258,7 +251,7 @@ public class Doolhof extends JPanel {
     }
     
     public void stopSpel () {
-        Spel spel = (Spel) getParent();
+        Spel spel = (Spel) getParent().getParent();
         spel.stopSpel();
         timer.stop();
     }

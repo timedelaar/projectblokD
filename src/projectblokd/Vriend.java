@@ -19,16 +19,18 @@ public class Vriend extends SpelItem {
         setImage("vriend.png");
     }
     
-    public void stopSpel () {
-        doolhof.stopSpel();
-    }
-    
     public boolean kanVerplaatsen (Held held) {
         return true;
     }
     
     public boolean kanVerplaatsen (Kogel kogel) {
         return true;
+    }
+    
+    @Override
+    public void actie (Held held, Iterator<SpelItem> iter) {
+        doolhof.stopSpel();
+        iter.remove();
     }
 
     @Override
