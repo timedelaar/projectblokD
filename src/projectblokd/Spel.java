@@ -77,13 +77,18 @@ public class Spel extends JPanel {
         cl.show(menus, "doolhof");
     }
     
-    public void stopSpel () {
+    public void stopSpel (int score) {
         System.out.println("gewonnen");
+        int minuten = score / 60;
+        int secondes = score % 60;
+        System.out.println("tijd: " + String.format("%02d", minuten) + ":" + String.format("%02d", secondes));
+        CardLayout cl = (CardLayout) menus.getLayout();
+        cl.show(menus, "hoofdmenu");
+        menus.remove(doolhof);
     }
     
     public void opnieuwStarten () {
         menus.remove(doolhof);
-        repaint();
         startSpel();
     }
 
@@ -98,9 +103,5 @@ public class Spel extends JPanel {
             KBListener = new KeyBoardListener();
             manager.addKeyEventDispatcher(KBListener);
         }
-    }
-    
-    public KeyBoardListener getKBListener () {
-        return KBListener;
     }
 }
