@@ -20,7 +20,7 @@ public class Held extends SpelItem {
     private BufferedImage lopend;
     private BufferedImage varend;
     
-    private Richtingen laatsteRichting;
+    private Richtingen laatsteRichting = Richtingen.NORTH;
     
     public Held () {
         lopend = ImageStorage.get().getImage("held.png");

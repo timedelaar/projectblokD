@@ -4,7 +4,6 @@
  */
 package projectblokd;
 
-import java.awt.Graphics;
 import java.util.ArrayList;
 import org.junit.*;
 import static org.junit.Assert.*;
@@ -366,9 +365,11 @@ public class VeldTest {
      */
     @Test
     public void testAddSpelItem () {
-        SpelItem spelItem = new Muur();
-        Veld instance = new Veld();
-        instance.addSpelItem(spelItem);
+        SpelItem spelItem = new Boot();
+        veld.addSpelItem(spelItem);
+        boolean expResult = true;
+        boolean result = veld.hasBoot();
+        assertEquals(expResult, result);
     }
 
     /**
