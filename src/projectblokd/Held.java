@@ -38,8 +38,8 @@ public class Held extends SpelItem {
     /*
      * De richting is het laatste richting die de held is geweest
      * Diezelfde richting wordt toegekend aan de neighbourveld
-     * Als de volgende veld niet leeg is, wordt er gecontroleert of de nieuweveld water is
-     * Zo niet, wordt er gecontroleert of de 
+     * Als de volgende veld niet leeg is, wordt er gecontroleert of de nieuwe veld water of geen water is
+     * Daarna verplaatst de held naar de desbetreffende richting
      */
     public void verplaats (Richtingen richting) {
         laatsteRichting = richting;

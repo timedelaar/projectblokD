@@ -23,6 +23,14 @@ public class Helper extends PowerUp {
         setImage("helper.png");
     }
     
+    /*
+     * Er worden twee arraylists gemaakt om de snelste route op te slaan
+     * De route begint vanaf waar de held staat
+     * Als de vriend niet gevonden kan worden, wordt de route verandert naar boot
+     * ls de boot niet gevonden kan worden, wordt de route verandert naar bazooka
+     * Als de route is gevonden wordt de pad getekend
+     * Helper wordt verwijderd
+     */
     @Override
     public void actie (Held held, Iterator iter) {
         this.held = held;
@@ -42,7 +50,13 @@ public class Helper extends PowerUp {
         }
         iter.remove();
     }
-    
+    /*
+     * De richtingen worden in een array opgeslagen
+     * Met de foreachloop kan er daardoor in elke richting gecontroleerd worden
+     * Als de held zich kan verplaatsen en het geen onbezochteveld is, behoort het bij de route
+     * Als de volgende veld een vriend is worden alle (onbezochte) velden in de array opgeslagen
+     * 
+     */
     private void vulOnbezochteVelden (Veld huidigVeld) {
         Richtingen[] richtingen = {Richtingen.NORTH, Richtingen.EAST, Richtingen.SOUTH, Richtingen.WEST};
         for (Richtingen richting : richtingen) {
@@ -74,7 +88,9 @@ public class Helper extends PowerUp {
         }
         return null;
     }
-    
+    /*
+     * 
+     */
     private Veld vindLaagsteAfstand (ArrayList<Veld> velden) {
         Veld laagsteVeld = null;
         if (velden.size() > 0) {
