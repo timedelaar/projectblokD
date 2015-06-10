@@ -112,15 +112,6 @@ public class Veld extends JComponent {
         return false;
     }
     
-    public boolean hasDestructable () {
-        for (SpelItem item : spelItems) {
-            if (item instanceof ZwakkeMuur) {
-                return true;
-            }
-        }
-        return false;
-    }
-    
     public boolean hasHeld () {
         for (SpelItem item : spelItems) {
             if (item instanceof Held) {

@@ -35,6 +35,10 @@ public class Kogel extends SpelItem {
         });
         timer.start();
     }
+    
+    public void stopTimer () {
+        timer.stop();
+    }
 
     private void verplaats() {
         Veld huidigVeld = getVeld();
