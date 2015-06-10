@@ -121,6 +121,15 @@ public class Veld extends JComponent {
         return false;
     }
     
+    public boolean hasHeld () {
+        for (SpelItem item : spelItems) {
+            if (item instanceof Held) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
     public boolean hasVriend () {
         for (SpelItem item : spelItems) {
             if (item instanceof Vriend) {
