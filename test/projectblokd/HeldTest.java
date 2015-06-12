@@ -15,6 +15,11 @@ import static org.junit.Assert.*;
 public class HeldTest {
     
     private Held instance;
+<<<<<<< HEAD
+=======
+    private Veld huidigVeld;
+    private Veld buur;
+>>>>>>> e4dfb862c61d260d34bb26acba1959a66bd890ed
     
     public HeldTest () {
     }
@@ -30,6 +35,8 @@ public class HeldTest {
     @Before
     public void setUp () {
         instance = new Held();
+        huidigVeld = new Veld();
+        buur = new Veld();
     }
     
     @After
@@ -41,14 +48,12 @@ public class HeldTest {
      */
     @Test
     public void testVerplaats1 () {
-        Veld huidigVeld = new Veld();
         huidigVeld.addSpelItem(instance);
-        Veld buurOost = new Veld();
-        huidigVeld.setNeighbour(Richtingen.EAST, buurOost);
         Richtingen richting = Richtingen.EAST;
+        huidigVeld.setNeighbour(richting, buur);
         instance.verplaats(richting);
-        assertEquals(null, huidigVeld.hasSpelItem());
-        assertEquals(instance, buurOost.hasSpelItem());
+        assertTrue(!huidigVeld.hasHeld());
+        assertTrue(buur.hasHeld());
     }
     
     /**
@@ -56,16 +61,14 @@ public class HeldTest {
      */
     @Test
     public void testVerplaats2 () {
-        Veld huidigVeld = new Veld();
         huidigVeld.addSpelItem(instance);
-        Veld buurOost = new Veld();
         SpelItem item = new ZwakkeMuur();
-        buurOost.addSpelItem(item);
-        huidigVeld.setNeighbour(Richtingen.EAST, buurOost);
-        Richtingen richting = Richtingen.EAST;
+        buur.addSpelItem(item);
+        Richtingen richting = Richtingen.NORTH;
+        huidigVeld.setNeighbour(Richtingen.NORTH, buur);
         instance.verplaats(richting);
-        assertEquals(instance, huidigVeld.hasSpelItem());
-        assertEquals(item, buurOost.hasSpelItem());
+        assertTrue(huidigVeld.hasHeld());
+        assertTrue(!buur.kanVerplaatsen(instance));
     }
     
     /**
@@ -73,16 +76,45 @@ public class HeldTest {
      */
     @Test
     public void testVerplaats3 () {
-        Veld huidigVeld = new Veld();
         huidigVeld.addSpelItem(instance);
-        Veld buurOost = new Veld();
-        SpelItem item = new Cheater(10, new Doolhof(100,100));
-        buurOost.addSpelItem(item);
-        huidigVeld.setNeighbour(Richtingen.EAST, buurOost);
-        Richtingen richting = Richtingen.EAST;
+        SpelItem item = new Bazooka();
+        buur.addSpelItem(item);
+        Richtingen richting = Richtingen.WEST;
+        huidigVeld.setNeighbour(richting, buur);
         instance.verplaats(richting);
-        assertEquals(null, huidigVeld.hasSpelItem());
-        assertEquals(instance, buurOost.hasSpelItem());
+        assertTrue(!huidigVeld.hasHeld());
+        assertTrue(buur.hasHeld());
+    }
+    
+    /**
+     * Test of verplaats method, of class Held.
+     */
+    @Test
+    public void testVerplaats4 () {
+        huidigVeld.addSpelItem(instance);
+        SpelItem item = new Water();
+        buur.addSpelItem(item);
+        Richtingen richting = Richtingen.SOUTH;
+        huidigVeld.setNeighbour(richting, buur);
+        instance.verplaats(richting);
+        assertTrue(huidigVeld.hasHeld());
+        assertTrue(!buur.hasHeld());
+    }
+    
+    /**
+     * Test of verplaats method, of class Held.
+     */
+    @Test
+    public void testVerplaats5 () {
+        huidigVeld.addSpelItem(instance);
+        instance.addBoot(new Boot());
+        SpelItem item = new Water();
+        buur.addSpelItem(item);
+        Richtingen richting = Richtingen.SOUTH;
+        huidigVeld.setNeighbour(richting, buur);
+        instance.verplaats(richting);
+        assertTrue(!huidigVeld.hasHeld());
+        assertTrue(buur.hasHeld());
     }
 
     /**

@@ -5,7 +5,6 @@
 package projectblokd;
 
 import java.awt.image.BufferedImage;
-import java.lang.ref.WeakReference;
 import java.util.Iterator;
 
 /**
@@ -15,7 +14,7 @@ import java.util.Iterator;
 public abstract class SpelItem implements Comparable {
     
     private BufferedImage image;
-    private WeakReference<Veld> veld;
+    private Veld veld;
     private int drawPriority = 20;
     
     public void setDrawPriority (int priority) {
@@ -39,11 +38,11 @@ public abstract class SpelItem implements Comparable {
     }
     
     public void setVeld (Veld veld) {
-        this.veld = new WeakReference<>(veld);
+        this.veld = veld;
     }
     
     public Veld getVeld () {
-        return veld.get();
+        return veld;
     }
     
     public abstract boolean kanVerplaatsen (Held held);
@@ -54,7 +53,7 @@ public abstract class SpelItem implements Comparable {
     
     public abstract void destroy (Iterator iter);
     
-    public void actie (Held held, Iterator iter){}
+    public void actie (Held held, Iterator<SpelItem> iter){}
     
     @Override
     public int compareTo (Object o) {

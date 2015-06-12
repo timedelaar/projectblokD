@@ -22,9 +22,11 @@ import javax.swing.*;
  */
 public class Doolhof extends JPanel {
     
+    
     private int width;
     private int height;
     private int VELD_SIZE;
+    private String currentMaze;
     
     private Knop resetKnop;
     
@@ -47,7 +49,7 @@ public class Doolhof extends JPanel {
      * 10 = boot
      * 11 = sterke muur
      */
-    private int[][] doolhofLayout = {{ 7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7},
+    private int[][] defaultLayout = {{ 7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7},
                                      { 7,  2, 11, 11, 11, 11, 11, 11, 11, 11,  6,  0,  0,  0,  0,  0,  0,  0, 11,  7},
                                      { 7,  0,  0,  0,  0,  0, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11,  0, 11,  7},
                                      { 7,  8, 11, 11, 11,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 11,  0, 11,  7},
@@ -68,27 +70,28 @@ public class Doolhof extends JPanel {
                                      { 7, 11,  0,  0,  0,  0,  0,  0,  0, 11,  0,  0,  0,  0,  0,  0,  0, 11, 11,  7},
                                      { 7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7}};
     
-    //private int[][] doolhofLayout;
+    private int[][] doolhofLayout;
     
     private final int CHEATER_WAARDE = 10;
     
-    public Doolhof (int width, int height, String maze) {
+    public Doolhof (int width, int height, String maze, KeyBoardListener KBListener) {
         this.width = width;
         this.height = height;
-        /*
+        currentMaze = maze;
         try {
             ObjectInputStream inStream = new ObjectInputStream(new FileInputStream(maze + ".txt"));
             doolhofLayout = (int[][]) inStream.readObject();
         }
         catch (Exception e) {
             System.out.println(e);
-        }*/
+            doolhofLayout = defaultLayout;
+        }
         init();
         maakScoreBoard();
         addResetKnop();
         long time = System.currentTimeMillis();
         System.out.println("Start");
-        maakDoolhof();
+        maakDoolhof(KBListener);
         time = System.currentTimeMillis() - time;
         System.out.println("Done in " + time + "ms");
         startScoreTimer();
@@ -132,7 +135,7 @@ public class Doolhof extends JPanel {
     
     public void opnieuwStarten () {
         Spel spel = (Spel) getParent().getParent();
-        spel.opnieuwStarten();
+        spel.opnieuwStarten(currentMaze);
     }
     
     private void startScoreTimer () {
@@ -167,6 +170,7 @@ public class Doolhof extends JPanel {
         }
     }
     
+<<<<<<< HEAD
     /*
      * Zodra de methode addSpelItem de held toevoegt, wordt startKeyBoardListener aangeroepen
      */
@@ -186,11 +190,14 @@ public class Doolhof extends JPanel {
      */
     
     private void maakDoolhof () {
+=======
+    private void maakDoolhof (KeyBoardListener KBListener) {
+>>>>>>> e4dfb862c61d260d34bb26acba1959a66bd890ed
         Veld[][] velden = new Veld[doolhofLayout.length][doolhofLayout.length];
         for (int y = 0; y < doolhofLayout.length; y++) {
             for (int x = 0; x < doolhofLayout[y].length; x++) {
                 Veld veld = addVeld(x, y);
-                addSpelItem(veld, doolhofLayout[y][x]);
+                addSpelItem(veld, doolhofLayout[y][x], KBListener);
                 velden[y][x] = veld;
             }
         }
@@ -211,15 +218,15 @@ public class Doolhof extends JPanel {
         return veld;
     }
     
-    private void addSpelItem (Veld veld, int item) {
+    private void addSpelItem (Veld veld, int item, KeyBoardListener KBListener) {
         if (item == 1) {
             ZwakkeMuur muur = new ZwakkeMuur();
             veld.addSpelItem(muur);
         }
         else if (item == 2) {
             Held held = new Held();
+            KBListener.setHeld(held);
             veld.addSpelItem(held);
-            startKeyBoardListener(held);
         }
         else if (item == 3) {
             Vriend vriend = new Vriend(this);
@@ -282,8 +289,8 @@ public class Doolhof extends JPanel {
     }
     
     public void stopSpel () {
-        Spel spel = (Spel) getParent();
-        spel.stopSpel();
+        Spel spel = (Spel) getParent().getParent();
+        spel.stopSpel(score);
         timer.stop();
     }
 }

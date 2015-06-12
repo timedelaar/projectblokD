@@ -67,27 +67,12 @@ public class DoolhofMenu extends JPanel {
     public void actie(Knop knop) {
         Spel spel = (Spel) getParent().getParent();
         if (knop.getActie() == Knop.MAZE1) {
-            deleteKnoppen();
-            spel.startSpel();
+            spel.startSpel("maze1");
         } else if (knop.getActie() == Knop.MAZE2) {
-            deleteKnoppen();
-            //start doolhof2
+            spel.startSpel("maze2");
         } else if (knop.getActie() == Knop.MAZE3) {
-            deleteKnoppen();
-            //start doolhof3
+            spel.startSpel("maze3");
         }
-    }
-
-    private void deleteKnoppen() {
-        maze1Knop.removeMouseListener(maze1Listener);
-        maze1Listener = null;
-        maze1Knop = null;
-        maze2Knop.removeMouseListener(maze2Listener);
-        maze2Listener = null;
-        maze2Knop = null;
-        maze3Knop.removeMouseListener(maze3Listener);
-        maze3Listener = null;
-        maze3Knop = null;
     }
 
     @Override

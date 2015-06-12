@@ -21,6 +21,7 @@ public class Spel extends JPanel {
     private int width;
     private int height;
     private JPanel menus;
+    private KeyBoardListener KBListener;
     
     public Spel (int width, int height) {
         this.width = width;
@@ -68,23 +69,40 @@ public class Spel extends JPanel {
         cl.show(menus, "doolhofmenu");
     }
     
-    public void startSpel () {
-        doolhof = new Doolhof(width, height, "maze1");
+    public void startSpel (String maze) {
+        startKeyBoardListener();
+        doolhof = new Doolhof(width, height, maze, KBListener);
         menus.add(doolhof, "doolhof");
         CardLayout cl = (CardLayout) menus.getLayout();
         cl.show(menus, "doolhof");
     }
     
-    public void stopSpel () {
+    public void stopSpel (int score) {
         System.out.println("gewonnen");
+        int minuten = score / 60;
+        int secondes = score % 60;
+        System.out.println("tijd: " + String.format("%02d", minuten) + ":" + String.format("%02d", secondes));
+        CardLayout cl = (CardLayout) menus.getLayout();
+        cl.show(menus, "hoofdmenu");
+        menus.remove(doolhof);
     }
     
-    public void opnieuwStarten () {
-        System.out.println("reset doolhof");
+    public void opnieuwStarten (String maze) {
+        menus.remove(doolhof);
+        startSpel(maze);
     }
 
     public void exit () {
         MainFrame frame = (MainFrame) getParent().getParent().getParent().getParent().getParent();
         frame.exit();
+    }
+    
+    private void startKeyBoardListener () {
+        if (KBListener == null) {
+            setFocusable(true);
+            KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
+            KBListener = new KeyBoardListener();
+            manager.addKeyEventDispatcher(KBListener);
+        }
     }
 }
