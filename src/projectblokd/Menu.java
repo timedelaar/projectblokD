@@ -43,7 +43,7 @@ public class Menu extends JPanel {
         startKnop.addMouseListener(startListener);
     }
     public final void maakHelpKnop(){
-        helpKnop = new Knop ("start-sign.png", Knop.HELP);
+        helpKnop = new Knop ("help-sign.png", Knop.HELP);
         add(helpKnop);
         helpKnop.setSize(new Dimension(KNOP_WIDTH, KNOP_HEIGHT));
         helpKnop.setLocation(200, 250);
