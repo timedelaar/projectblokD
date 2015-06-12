@@ -37,7 +37,6 @@ public class Held extends SpelItem {
     }
     
     public void verplaats (Richtingen richting) {
-        laatsteRichting = richting;
         Veld huidigVeld = getVeld();
         Veld nieuwVeld = huidigVeld.getNeighbour(richting);
         if (nieuwVeld != null) {
@@ -53,6 +52,7 @@ public class Held extends SpelItem {
                 nieuwVeld.powerUp(this);
                 nieuwVeld.repaint();
                 huidigVeld.repaint();
+                laatsteRichting = richting;
             }
         }
     }
