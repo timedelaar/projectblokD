@@ -4,6 +4,8 @@
  */
 package projectblokd;
 
+import java.util.Iterator;
+
 /**
  *
  * @author Tim
@@ -12,6 +14,9 @@ public class ZwakkeMuur extends Muur {
     
     public ZwakkeMuur () {
         setImage("zwakke-muur.png");
-        setSterkte(1);
+    }
+    
+    public void destroy (Iterator<SpelItem> iter) {
+        iter.remove();
     }
 }
