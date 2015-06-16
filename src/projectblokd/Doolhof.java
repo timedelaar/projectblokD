@@ -6,7 +6,6 @@ package projectblokd;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -46,24 +45,25 @@ public class Doolhof extends JPanel {
      * 10 = boot
      * 11 = sterke muur
      * 12 = draaikolk
+     * 13 = kaats muur
      */
     private int[][] defaultLayout = {{ 7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7},
-                                     { 7, 11, 11, 11, 11, 11, 11, 11, 11, 11,  3,  1,  0,  0,  0,  0,  0,  0, 11,  7},
+                                     { 7, 11, 11, 11, 11, 11, 11, 11, 11, 11,  3,  0,  0,  0,  0,  0,  0,  0, 11,  7},
                                      { 7,  2,  0,  0,  0,  0, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11,  0, 11,  7},
-                                     { 7, 11,  0, 11, 11,  0,  0,  0,  0, 11,  0,  0,  0,  0,  0,  0, 12,  0, 11,  7},
+                                     { 7, 11,  0, 11, 11,  0,  0,  0,  0, 11,  0,  0,  0,  0,  0,  0, 12,  1, 11,  7},
                                      { 7, 11,  0, 11, 11, 11, 11, 11,  0, 11,  0, 11, 11,  6, 11,  0, 12,  0, 11,  7},
-                                     { 7, 11,  0, 11, 11, 11,  4,  0,  0, 11,  0, 11, 11,  6,  0,  0, 12,  1, 11,  7},
+                                     { 7, 11,  0, 11, 11, 11,  4,  0,  0, 11,  0, 11, 11,  6,  0,  0, 12,  0, 11,  7},
                                      { 7, 10,  0,  9, 11, 11, 11, 11,  0, 11,  0, 11, 11, 11, 11,  0, 12,  0, 11,  7},
                                      { 7, 11,  9,  9,  9,  9, 11,  6,  0,  1,  0,  0,  0,  0,  0,  0, 12,  0, 11,  7},
                                      { 7, 12,  9,  9,  9,  9, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11,  1, 11,  7},
                                      { 7, 12,  9,  9,  9,  9,  0,  0,  0, 11,  4,  0,  5, 11, 11,  0, 11,  0,  8,  7},
                                      { 7, 12,  9, 12,  9,  9,  9, 11,  5, 11,  0,  0, 11, 11, 11,  0, 11,  9,  8,  7},
                                      { 7, 12,  9, 12,  9,  9,  9, 11, 11, 11, 11,  0, 11,  4, 11,  9,  9,  9,  8,  7},
-                                     { 7, 12,  9,  9,  9,  9,  9, 11,  4, 11, 11,  0, 11,  0,  0,  9, 11, 11,  8,  7},
+                                     { 7, 12,  9,  9,  9,  9,  9, 11, 13, 11, 11,  0, 11,  0,  0,  9, 11, 11,  8,  7},
                                      { 7, 12,  9,  9,  9,  9, 11, 11,  9, 11, 11,  0, 11,  0,  0,  9, 11, 11,  4,  7},
                                      { 7, 12,  9,  9,  9,  9,  9,  9,  9, 11, 11,  0, 11,  0, 11,  9, 11,  4, 11,  7},
-                                     { 7,  9,  9,  9,  9,  9, 11, 11,  9, 11,  0,  0, 11,  0, 11,  9, 11,  9, 11,  7},
-                                     { 7,  9,  9,  9,  9,  9,  9, 12,  1, 11, 11,  0,  0,  0, 11,  9,  9,  9, 11,  7},
+                                     { 7,  9,  9,  9,  9,  9, 11, 11,  1, 11,  0,  0, 11,  0, 11,  9, 11,  9, 11,  7},
+                                     { 7,  9,  9,  9,  9,  9,  9, 11,  0, 11, 11,  0,  0,  0, 11,  9,  9,  9, 11,  7},
                                      { 7,  9,  0, 11, 11, 11, 11, 11,  0, 11, 11, 11, 11, 11, 11,  9, 11,  9, 11,  7},
                                      { 7,  9,  0,  6, 11,  6,  9,  9,  0,  0,  0,  0,  0,  0,  0,  0,  0, 11, 11,  7},
                                      { 7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7}};
@@ -77,7 +77,7 @@ public class Doolhof extends JPanel {
         this.height = height;
         currentMaze = maze;
         try {
-            ObjectInputStream inStream = new ObjectInputStream(new FileInputStream(maze + ".txt"));
+            ObjectInputStream inStream = new ObjectInputStream(new FileInputStream(maze + ".ttxt"));
             doolhofLayout = (int[][]) inStream.readObject();
         }
         catch (Exception e) {
@@ -237,6 +237,10 @@ public class Doolhof extends JPanel {
             veld.addSpelItem(water);
             Draaikolk draaikolk = new Draaikolk();
             veld.addSpelItem(draaikolk);
+        }
+        else if (item == 13) {
+            KaatsMuur kaatsMuur = new KaatsMuur();
+            veld.addSpelItem(kaatsMuur);
         }
     }
     

@@ -45,6 +45,7 @@ public class Kogel extends SpelItem {
         Veld nieuwVeld = huidigVeld.getNeighbour(richting);
         if (nieuwVeld != null) {
             if (nieuwVeld.kanVerplaatsen(this)) {
+                nieuwVeld = huidigVeld.getNeighbour(richting);
                 nieuwVeld.addSpelItem(this);
                 huidigVeld.verwijderSpelItem(this);
                 nieuwVeld.repaint();
@@ -63,6 +64,23 @@ public class Kogel extends SpelItem {
             huidigVeld.verwijderSpelItem(this);
             huidigVeld.repaint();
             timer.stop();
+        }
+    }
+    
+    public void omdraaien () {
+        switch (richting) {
+            case NORTH : 
+                richting = Richtingen.SOUTH;
+                break;
+            case EAST :
+                richting = Richtingen.WEST;
+                break;
+            case SOUTH :
+                richting = Richtingen.NORTH;
+                break;
+            case WEST : 
+                richting = Richtingen.EAST;
+                break;
         }
     }
     
