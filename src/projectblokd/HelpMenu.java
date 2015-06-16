@@ -19,20 +19,20 @@ public class HelpMenu extends JPanel {
     private Knop terugKnop;
     private KnopListener terugListener;
     
-    private final int KNOP_WIDTH = 200;
+    private final int KNOP_WIDTH = 150;
     private final int KNOP_HEIGHT = (int) (KNOP_WIDTH * 0.3125);
     
     public HelpMenu () {
         setLayout(null);
-        background = ImageStorage.get().getImage("menu_bg.png");
+        background = ImageStorage.get().getImage("helpmenu_bg.png");
         maakTerugKnop();
     }
     
     public final void maakTerugKnop () {
-        terugKnop = new Knop("exit-sign.png", Knop.TERUG);
+        terugKnop = new Knop("back-sign.png", Knop.TERUG);
         add(terugKnop);
         terugKnop.setSize(new Dimension(KNOP_WIDTH, KNOP_HEIGHT));
-        terugKnop.setLocation(50, 10);
+        terugKnop.setLocation(420, 530);
         terugListener = new KnopListener(this, terugKnop);
         terugKnop.addMouseListener(terugListener);
     }

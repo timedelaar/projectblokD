@@ -22,6 +22,8 @@ public class DoolhofMenu extends JPanel {
     private KnopListener maze2Listener;
     private Knop maze3Knop;
     private KnopListener maze3Listener;
+    private Knop terugKnop;
+    private KnopListener terugListener;
     
     private final int KNOP_WIDTH = 200;
     private final int KNOP_HEIGHT = (int) (KNOP_WIDTH * 0.3125);
@@ -32,6 +34,7 @@ public class DoolhofMenu extends JPanel {
         maakMaze1Knop();
         maakMaze2Knop();
         maakMaze3Knop();
+        maakTerugKnop();
     }
 
     public final void maakMaze1Knop() {
@@ -60,6 +63,15 @@ public class DoolhofMenu extends JPanel {
         maze2Listener = new KnopListener(this, maze2Knop);
         maze2Knop.addMouseListener(maze2Listener);
     }
+    
+    public final void maakTerugKnop () {
+        terugKnop = new Knop("back-sign.png", Knop.TERUG);
+        add(terugKnop);
+        terugKnop.setSize(new Dimension(150, 47));
+        terugKnop.setLocation(420, 530);
+        terugListener = new KnopListener(this, terugKnop);
+        terugKnop.addMouseListener(terugListener);
+    }
 
     public void actie(Knop knop) {
         Spel spel = (Spel) getParent().getParent();
@@ -69,6 +81,9 @@ public class DoolhofMenu extends JPanel {
             spel.startSpel("maze2");
         } else if (knop.getActie() == Knop.MAZE3) {
             spel.startSpel("maze3");
+        }
+        else if (knop.getActie() == Knop.TERUG) {
+            spel.toonMenu();
         }
     }
 
