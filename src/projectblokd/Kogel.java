@@ -57,13 +57,13 @@ public class Kogel extends SpelItem {
                 nieuwVeld.destroySpelItems();
                 nieuwVeld.repaint();
                 huidigVeld.repaint();
-                timer.stop();
+                stopTimer();
             }
         }
         else {
             huidigVeld.verwijderSpelItem(this);
             huidigVeld.repaint();
-            timer.stop();
+            stopTimer();
         }
     }
     

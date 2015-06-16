@@ -121,6 +121,24 @@ public class Veld extends JComponent {
         return false;
     }
     
+    public boolean hasLadder () {
+        for (SpelItem item : spelItems) {
+            if (item instanceof Ladder) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public Ladder getLadder () {
+        for (SpelItem item : spelItems) {
+            if (item instanceof Ladder) {
+                return (Ladder) item;
+            }
+        }
+        return null;
+    }
+    
     public boolean hasVriend () {
         for (SpelItem item : spelItems) {
             if (item instanceof Vriend) {

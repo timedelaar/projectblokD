@@ -13,6 +13,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import javax.swing.*;
 
 /**
@@ -46,6 +47,7 @@ public class Doolhof extends JPanel {
      * 11 = sterke muur
      * 12 = draaikolk
      * 13 = kaats muur
+     * 14 = ladder
      */
     private int[][] defaultLayout = {{ 7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7},
                                      { 7, 11, 11, 11, 11, 11, 11, 11, 11, 11,  3,  0,  0,  0,  0,  0,  0,  0, 11,  7},
@@ -59,7 +61,7 @@ public class Doolhof extends JPanel {
                                      { 7, 12,  9,  9,  9,  9,  0,  0,  0, 11,  4,  0,  5, 11, 11,  0, 11,  0,  8,  7},
                                      { 7, 12,  9, 12,  9,  9,  9, 11,  5, 11,  0,  0, 11, 11, 11,  0, 11,  9,  8,  7},
                                      { 7, 12,  9, 12,  9,  9,  9, 11, 11, 11, 11,  0, 11,  4, 11,  9,  9,  9,  8,  7},
-                                     { 7, 12,  9,  9,  9,  9,  9, 11, 13, 11, 11,  0, 11,  0,  0,  9, 11, 11,  8,  7},
+                                     { 7, 12,  9,  9,  9,  9,  9, 11,  4, 11, 11,  0, 11,  0,  0,  9, 11, 11,  8,  7},
                                      { 7, 12,  9,  9,  9,  9, 11, 11,  9, 11, 11,  0, 11,  0,  0,  9, 11, 11,  4,  7},
                                      { 7, 12,  9,  9,  9,  9,  9,  9,  9, 11, 11,  0, 11,  0, 11,  9, 11,  4, 11,  7},
                                      { 7,  9,  9,  9,  9,  9, 11, 11,  1, 11,  0,  0, 11,  0, 11,  9, 11,  9, 11,  7},
@@ -174,6 +176,7 @@ public class Doolhof extends JPanel {
             }
         }
         voegBurenToe(velden);
+        voegExitsToe(velden);
     }
     
     private Veld addVeld (int x, int y) {
@@ -242,6 +245,10 @@ public class Doolhof extends JPanel {
             KaatsMuur kaatsMuur = new KaatsMuur();
             veld.addSpelItem(kaatsMuur);
         }
+        else if (item == 14) {
+            Ladder ladder = new Ladder();
+            veld.addSpelItem(ladder);
+        }
     }
     
     private void voegBurenToe (Veld[][] velden) {
@@ -259,6 +266,23 @@ public class Doolhof extends JPanel {
                 if (x < velden.length-1) {
                     velden[y][x].setNeighbour(Richtingen.EAST, velden[y][x+1]);
                 }
+            }
+        }
+    }
+    
+    private void voegExitsToe (Veld[][] velden) {
+        ArrayList<Veld> exits = new ArrayList<>();
+        for (int y = 0; y < velden.length; y++) {
+            for (int x = 0; x < velden[y].length; x++) {
+                if (velden[y][x].hasLadder()) {
+                    exits.add(velden[y][x]);
+                }
+            }
+        }
+        for (Veld exit : exits) {
+            Ladder ladder = exit.getLadder();
+            if (ladder != null) {
+                ladder.setExits(exits);
             }
         }
     }
