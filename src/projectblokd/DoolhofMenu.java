@@ -73,6 +73,9 @@ public class DoolhofMenu extends JPanel {
         terugKnop.addMouseListener(terugListener);
     }
 
+    /*
+     * Voert de goede actie uit van de gegeven knop.
+     */
     public void actie(Knop knop) {
         Spel spel = (Spel) getParent().getParent();
         if (knop.getActie() == Knop.MAZE1) {

@@ -23,6 +23,11 @@ public class Helper extends PowerUp {
         setImage("helper.png");
     }
     
+    /*
+     * Methode wordt aangeroepen door veld.
+     * Vindt de korste route naar het einde en tekent deze.
+     * Gebaseerd op Dijkstra's algoritme.
+     */
     @Override
     public void actie (Held held, Iterator iter) {
         this.held = held;
@@ -37,6 +42,10 @@ public class Helper extends PowerUp {
         iter.remove();
     }
     
+    /*
+     * Vult een arrayList met alle velden waar de held kan komen.
+     * Als het veld de vriend bevat wordt deze opgeslagen als einde.
+     */
     private void vulOnbezochteVelden (Veld huidigVeld) {
         Richtingen[] richtingen = {Richtingen.NORTH, Richtingen.EAST, Richtingen.SOUTH, Richtingen.WEST};
         for (Richtingen richting : richtingen) {
@@ -53,6 +62,10 @@ public class Helper extends PowerUp {
         }
     }
     
+    /*
+     * Vindt in de array met onbezochte velden het veld met de laagste afstand
+     * van het beginpunt.
+     */
     private Veld vindLaagsteAfstand (ArrayList<Veld> velden) {
         Veld laagsteVeld = null;
         if (velden.size() > 0) {
@@ -66,6 +79,13 @@ public class Helper extends PowerUp {
         return laagsteVeld;
     }
     
+    /*
+     * Begint bij het beginpunt en gaat elk veld af totdat het einde is gevonden
+     * of er geen velden meer onbezocht zijn. Geeft elk veld een afstand van het beginpunt.
+     * Als alle buren van het veld een afstand hebben wordt het veld verwijderd
+     * uit de arrayList met onbezochte velden. Pakt vervolgens uit de overgebleven
+     * onbezochte velden degene met de laagste afstand en begint opnieuw.
+     */
     private boolean vindRoute (Veld start, Veld einde) {
         Veld huidigVeld = start;
         boolean gevonden = false;
@@ -95,6 +115,9 @@ public class Helper extends PowerUp {
         return gevonden;
     }
     
+    /*
+     * Haalt de kortste route op en markeert dat deze onderdeel is van de route.
+     */
     private void markeerRoute (Veld huidigVeld) {
             huidigVeld.isOnderdeelRoute(true);
             if (huidigVeld.getAfstand() != 0) {

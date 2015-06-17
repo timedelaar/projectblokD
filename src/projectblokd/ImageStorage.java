@@ -24,6 +24,12 @@ public class ImageStorage {
         return single;
     }
     
+    /*
+     * Controleert of de opgegeven referentie voorkomt in de opslag.
+     * Zo ja, return het plaatje.
+     * Zo nee, laad het plaatje en sla deze op in de opslag.
+     * return vervolgens het plaatje.
+     */
     public BufferedImage getImage (String ref) {
         BufferedImage image = storage.get(ref);
         if (image != null) {
@@ -36,10 +42,16 @@ public class ImageStorage {
         }
     }
     
+    /*
+     * Slaat een plaatje op in de opslag onder de gegeven referentie.
+     */
     public void addImage (String ref, BufferedImage image) {
         storage.put(ref, image);
     }
     
+    /*
+     * Laadt een plaatje doormiddel van de gegeven referentie.
+     */
     public BufferedImage loadImage (String ref) {
         BufferedImage image = null;
         try {
@@ -52,6 +64,9 @@ public class ImageStorage {
         return image;
     }
     
+    /*
+     * Resized een plaatje en slaat deze op in de opslag.
+     */
     public BufferedImage resizeImage (String newRef, BufferedImage image, int width, int height) {
         BufferedImage resizedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2 = resizedImage.createGraphics();

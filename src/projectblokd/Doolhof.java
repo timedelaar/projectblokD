@@ -34,7 +34,9 @@ public class Doolhof extends JPanel {
     JLabel scoreLabel;
     private int score;
     
-    /* 1 = zwakke muur
+    /* Dit is de 2D array om alle objecten een nummer/waarde toe te kennen
+     * De daadwerkelijke doolhof wordt in de methode maakDoolhof gemaakt.
+     * 1 = zwakke muur
      * 2 = held
      * 3 = vriend
      * 4 = cheater
@@ -107,6 +109,9 @@ public class Doolhof extends JPanel {
         }
     }
     
+   /* De methode maakScoreboard wordt er een image gemaakt met timer bovenop getekend
+    * Hierbij is een JLabel gebruikt en is er wat positionering toegepast
+    */
     private void maakScoreBoard () {
         BufferedImage image = ImageStorage.get().getImage("sign.png");
         image = ImageStorage.get().resizeImage("score-sign", image, 100, 25);
@@ -129,6 +134,9 @@ public class Doolhof extends JPanel {
         resetKnop.addMouseListener(new KnopListener(this, resetKnop));
     }
     
+   /* De methode opnieuwstarten roept de class Spel (door twee niveaus omhoog te gaan)
+    * In spel wordt weer de methode opnieuwStarten aangeroepen
+    */
     public void opnieuwStarten () {
         Spel spel = (Spel) getParent().getParent();
         spel.opnieuwStarten(currentMaze);
@@ -166,6 +174,12 @@ public class Doolhof extends JPanel {
         }
     }
     
+    /* Leest de tweedimensionale array en maakt de velden aan.
+     * Roept vervolgens addSpelItem aan voor elk veld om de spelItems toe te voegen.
+     * Slaat de velden tijdelijk op in een tweedimensionale array om de buren
+     * aan elk veld toe te kennen. En roept daarna voegExitsToe aan om alle exits
+     * toe te kennen aan de ladders.
+     */
     private void maakDoolhof (KeyBoardListener KBListener) {
         Veld[][] velden = new Veld[doolhofLayout.length][doolhofLayout.length];
         for (int y = 0; y < doolhofLayout.length; y++) {
@@ -179,6 +193,9 @@ public class Doolhof extends JPanel {
         voegExitsToe(velden);
     }
     
+    /* Tekent het veld op de juiste plaats.
+     * return - het zojuist aangemaakte veld.
+     */
     private Veld addVeld (int x, int y) {
         int xCord = x * VELD_SIZE;
         int yCord = y * VELD_SIZE;
@@ -189,6 +206,11 @@ public class Doolhof extends JPanel {
         return veld;
     }
     
+    /*
+     * Checkt of een spelItem toegevoegd moet worden aan het veld.
+     * Zo ja, voegt het spelItem toe. Als het spelItem de held is, linkt de 
+     * keyboardlistener aan de held.
+     */
     private void addSpelItem (Veld veld, int item, KeyBoardListener KBListener) {
         if (item == 1) {
             ZwakkeMuur muur = new ZwakkeMuur();
@@ -251,6 +273,9 @@ public class Doolhof extends JPanel {
         }
     }
     
+    /* Voegt de buren toe aan alle velden.
+     * Elk veld weet welke velden er aangrenzend liggen.
+     */
     private void voegBurenToe (Veld[][] velden) {
         for (int y = 0; y < velden.length; y++) {
             for (int x = 0; x < velden[y].length; x++) {
@@ -270,6 +295,10 @@ public class Doolhof extends JPanel {
         }
     }
     
+    /* Voegt de exits toe aan de ladders.
+     * Maakt eerst een arrayList met alle velden die een ladder bevatten.
+     * Vervolgens wordt die array in elke ladder opgeslagen.
+     */
     private void voegExitsToe (Veld[][] velden) {
         ArrayList<Veld> exits = new ArrayList<>();
         for (int y = 0; y < velden.length; y++) {
@@ -286,7 +315,9 @@ public class Doolhof extends JPanel {
             }
         }
     }
-    
+    /*
+     * Roept stopSpel aan in de klasse Spel.
+     */
     public void stopSpel () {
         Spel spel = (Spel) getParent().getParent();
         spel.stopSpel(score);

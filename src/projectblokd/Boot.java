@@ -16,6 +16,9 @@ public class Boot extends PowerUp {
         setImage("boot.png");
     }
 
+    /* De methode wordt aangeroepen door veld
+     * Voegt de boot toe aan de held en verwijderd de power-up
+     */
     @Override
     public void actie (Held held, Iterator iter) {
         held.addBoot(this);

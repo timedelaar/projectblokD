@@ -16,6 +16,10 @@ public class Water extends SpelItem {
         setImage("water.png");
     }
 
+    /*
+     * Return true als de held een boot heeft,
+     * anders false.
+     */
     @Override
     public boolean kanVerplaatsen (Held held) {
         try {

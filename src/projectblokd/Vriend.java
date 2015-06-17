@@ -27,6 +27,9 @@ public class Vriend extends SpelItem {
         return true;
     }
     
+    /*
+     * Stopt het spel
+     */
     @Override
     public void actie (Held held, Iterator<SpelItem> iter) {
         doolhof.stopSpel();

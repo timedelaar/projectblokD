@@ -14,6 +14,9 @@ public class KaatsMuur extends Muur {
         setImage("kaats-muur.png");
     }
     
+    /*
+     * Draait de kogel om.
+     */
     @Override
     public boolean kanVerplaatsen (Kogel kogel) {
         kogel.omdraaien();

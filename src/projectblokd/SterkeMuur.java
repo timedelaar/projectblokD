@@ -18,6 +18,11 @@ public class SterkeMuur extends Muur {
         setImage("muur.png");
     }
     
+    /*
+     * Verlaagt de sterkte van de muur met 1.
+     * Als de muur bijna kapot is, verander het plaatje.
+     * Als de muur kapot is, verwijder de muur.
+     */
     public void destroy (Iterator<SpelItem> iter) {
         sterkte --;
         if (sterkte == 1) {

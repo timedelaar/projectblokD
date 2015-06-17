@@ -24,6 +24,9 @@ public class Kogel extends SpelItem {
         startTimer();
     }
     
+    /*
+     * Start de verplaats timer.
+     */
     private void startTimer () {
         timer = new Timer(200, new ActionListener(){
 
@@ -40,6 +43,14 @@ public class Kogel extends SpelItem {
         timer.stop();
     }
 
+    /*
+     * Verplaatst de kogel.
+     * Controleert of er een veld is in de gegeven richting.
+     * Zo nee, verwijderd de kogel.
+     * Zo ja, kijk of de kogel zich kan verplaatsen in die richting.
+     * Zo ja, voegt kogel toe aan het nieuwe veld en verwijderd hem van het oude veld.
+     * Zo nee, verwijderd de kogel en roept destroySpelItems aan van het nieuwe veld.
+     */
     private void verplaats() {
         Veld huidigVeld = getVeld();
         Veld nieuwVeld = huidigVeld.getNeighbour(richting);
@@ -67,6 +78,9 @@ public class Kogel extends SpelItem {
         }
     }
     
+    /*
+     * Draait de richting van de kogel om.
+     */
     public void omdraaien () {
         switch (richting) {
             case NORTH : 

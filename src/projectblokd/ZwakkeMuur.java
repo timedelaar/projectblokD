@@ -16,6 +16,9 @@ public class ZwakkeMuur extends Muur {
         setImage("zwakke-muur.png");
     }
     
+    /*
+     * Verwijder de muur.
+     */
     public void destroy (Iterator<SpelItem> iter) {
         iter.remove();
     }

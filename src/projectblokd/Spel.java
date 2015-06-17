@@ -30,6 +30,9 @@ public class Spel extends JPanel {
         init();
     }
     
+    /*
+     * Zet de layout, maakt de menu's en toon het hoofdmenu.
+     */
     private void init () {
         FlowLayout layout = (FlowLayout) getLayout();
         layout.setHgap(0);
@@ -39,6 +42,9 @@ public class Spel extends JPanel {
         toonMenu();
     }
     
+    /*
+     * Maakt de menu's en voegt ze toe aan een card layout.
+     */
     public void createMenus () {
         menu = new Menu();
         menu.setPreferredSize(new Dimension(width, height));
@@ -54,21 +60,33 @@ public class Spel extends JPanel {
         add(menus);
     }
     
+    /*
+     * Toont het hoofd menu
+     */
     public void toonMenu () {
         CardLayout cl = (CardLayout) menus.getLayout();
         cl.show(menus, "hoofdmenu");
     }
     
+    /*
+     * Toont het help menu
+     */
     public void toonHelpMenu(){
         CardLayout cl = (CardLayout) menus.getLayout();
         cl.show(menus, "helpmenu");
     }
     
+    /*
+     * Toon het doolhof selectie menu
+     */
     public void toonDoolhofMenu () {
         CardLayout cl = (CardLayout) menus.getLayout();
         cl.show(menus, "doolhofmenu");
     }
     
+    /*
+     * Maakt een nieuw doolhof object en voegt deze toe aan de card layout.
+     */
     public void startSpel (String maze) {
         startKeyBoardListener();
         doolhof = new Doolhof(width, height, maze, KBListener);
@@ -77,6 +95,9 @@ public class Spel extends JPanel {
         cl.show(menus, "doolhof");
     }
     
+    /*
+     * Stopt het spel en verwijderd het doolhof object van de card layout.
+     */
     public void stopSpel (int score) {
         System.out.println("gewonnen");
         int minuten = score / 60;
@@ -87,16 +108,25 @@ public class Spel extends JPanel {
         menus.remove(doolhof);
     }
     
+    /*
+     * verwijder het oude doolhof en maakt een nieuw doolhof object aan.
+     */
     public void opnieuwStarten (String maze) {
         menus.remove(doolhof);
         startSpel(maze);
     }
 
+    /*
+     * Sluit het spel.
+     */
     public void exit () {
         MainFrame frame = (MainFrame) getParent().getParent().getParent().getParent().getParent();
         frame.dispose();
     }
     
+    /*
+     * Start de keyboardlistener
+     */
     private void startKeyBoardListener () {
         if (KBListener == null) {
             setFocusable(true);

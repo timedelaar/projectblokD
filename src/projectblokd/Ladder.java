@@ -20,6 +20,9 @@ public class Ladder extends PowerUp {
         exits = new ArrayList<>();
     }
     
+    /*
+     * Kiest een random uitgang en roept verplaatsHeld aan.
+     */
     @Override
     public void actie (Held held, Iterator iter) {
         Veld exit = getVeld();
@@ -30,6 +33,9 @@ public class Ladder extends PowerUp {
         verplaatsHeld(held, exit);
     }
     
+    /*
+     * Verplaats de held naar de gegeven uitgang.
+     */
     private void verplaatsHeld (Held held, Veld exit) {
         exit.addSpelItem(held);
         getVeld().verwijderSpelItem(held);

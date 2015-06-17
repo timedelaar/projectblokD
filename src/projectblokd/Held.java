@@ -29,6 +29,10 @@ public class Held extends SpelItem {
         setDrawPriority(15);
     }
     
+    /*
+     * Checkt of de held een bazooka heeft.
+     * Zo ja, schiet de bazooka af in de laatst gelopen richting.
+     */
     public void schiet (){
         if (bazooka != null) {
             bazooka.schiet(laatsteRichting);
@@ -36,6 +40,16 @@ public class Held extends SpelItem {
         }
     }
     
+    /*
+     * Verplaatst de held in de gegeven richting.
+     * Controleert of er een veld is in de gegeven richting.
+     * Zo ja, kijk of de held zich kan verplaatsen in die richting.
+     * Kijkt of de held van land naar water gaat of andersom.
+     * Zo ja, verandert het plaatje.
+     * voegt held toe aan het nieuwe veld en verwijderd hem van het oude veld.
+     * roept powerUp aan van het nieuwe veld.
+     * verandert de laatst gelopen richting in de gegeven richting.
+     */
     public void verplaats (Richtingen richting) {
         Veld huidigVeld = getVeld();
         Veld nieuwVeld = huidigVeld.getNeighbour(richting);

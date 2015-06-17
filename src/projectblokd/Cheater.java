@@ -21,6 +21,10 @@ public class Cheater extends PowerUp {
         setImage("cheater.png");
     }
 
+    /* De methode wordt aangeroepen door veld.
+     * Roept de methode verlaagScore aan in doolhof
+     * Verwijdert de power-up
+     */
     @Override
     public void actie (Held held, Iterator iter) {
         doolhof.verlaagScore(waarde);

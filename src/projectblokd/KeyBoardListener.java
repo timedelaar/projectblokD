@@ -27,22 +27,25 @@ public class KeyBoardListener implements KeyEventDispatcher {
         this.held = held;
     }
 
+    /*
+     * Luistert welke toets wordt ingedrukt en handelt daar naar.
+     */
     @Override
     public boolean dispatchKeyEvent (KeyEvent e) {
         if (e.getID() == KeyEvent.KEY_PRESSED) {
             if (e.getKeyCode() == KeyEvent.VK_LEFT) {
                 held.verplaats(Richtingen.WEST);
             }
-            else if (e.getKeyCode() == 38) {
+            else if (e.getKeyCode() == KeyEvent.VK_UP) {
                 held.verplaats(Richtingen.NORTH);
             }
-            else if (e.getKeyCode() == 39) {
+            else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
                 held.verplaats(Richtingen.EAST);
             }
-            else if (e.getKeyCode() == 40) {
+            else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
                 held.verplaats(Richtingen.SOUTH);
             }
-            else if (e.getKeyCode() == 32) {
+            else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
                 held.schiet();
             }
         }
