@@ -31,12 +31,6 @@ public class Helper extends PowerUp {
         Veld start = getVeld();
         start.setAfstand(0);
         vulOnbezochteVelden(start);
-        if (einde == null) {
-            einde = vindBoot();
-        }
-        if (einde == null) {
-            einde = vindBazooka();
-        }
         if (vindRoute(start, einde)) {
             markeerRoute(einde);
         }
@@ -57,22 +51,6 @@ public class Helper extends PowerUp {
                 }
             }
         }
-    }
-    
-    private Veld vindBoot () {
-        for (Veld veld : onbezochteVelden) {
-            if (veld.hasBoot())
-                return veld;
-        }
-        return null;
-    }
-    
-    private Veld vindBazooka () {
-        for (Veld veld : onbezochteVelden) {
-            if (veld.hasBazooka())
-                return veld;
-        }
-        return null;
     }
     
     private Veld vindLaagsteAfstand (ArrayList<Veld> velden) {

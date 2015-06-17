@@ -121,6 +121,15 @@ public class Veld extends JComponent {
         return false;
     }
     
+    public boolean hasKogel () {
+        for (SpelItem item : spelItems) {
+            if (item instanceof Kogel) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
     public boolean hasLadder () {
         for (SpelItem item : spelItems) {
             if (item instanceof Ladder) {
@@ -137,6 +146,15 @@ public class Veld extends JComponent {
             }
         }
         return null;
+    }
+    
+    public boolean hasMuur () {
+        for (SpelItem item : spelItems) {
+            if (item instanceof Muur) {
+                return true;
+            }
+        }
+        return false;
     }
     
     public boolean hasVriend () {

@@ -99,4 +99,12 @@ public class Kogel extends SpelItem {
     @Override
     public void destroy (Iterator<SpelItem> iter) {
     }
+    
+    public void forceVerplaats () {
+        verplaats();
+    }
+    
+    public Richtingen getRichting () {
+        return richting;
+    }
 }

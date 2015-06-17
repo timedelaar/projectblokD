@@ -4,6 +4,7 @@
  */
 package projectblokd;
 
+import java.awt.Graphics;
 import java.util.ArrayList;
 import org.junit.*;
 import static org.junit.Assert.*;
@@ -544,5 +545,92 @@ public class VeldTest {
         veld.isOnderdeelRoute(bool);
         boolean result = veld.getOnderdeelRoute();
         assertEquals(bool, result);
+    }
+
+    /**
+     * Test of hasKogel method, of class Veld.
+     */
+    @Test
+    public void testHasKogel () {
+        boolean expResult = false;
+        boolean result = veld.hasKogel();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of hasKogel method, of class Veld.
+     */
+    @Test
+    public void testHasKogel2 () {
+        Kogel kogel = new Kogel(Richtingen.NORTH);
+        kogel.stopTimer();
+        veld.addSpelItem(kogel);
+        boolean expResult = true;
+        boolean result = veld.hasKogel();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of hasLadder method, of class Veld.
+     */
+    @Test
+    public void testHasLadder () {
+        boolean expResult = false;
+        boolean result = veld.hasLadder();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of hasLadder method, of class Veld.
+     */
+    @Test
+    public void testHasLadder2 () {
+        veld.addSpelItem(new Ladder());
+        boolean expResult = true;
+        boolean result = veld.hasLadder();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getLadder method, of class Veld.
+     */
+    @Test
+    public void testGetLadder () {
+        Ladder expResult = null;
+        Ladder result = veld.getLadder();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getLadder method, of class Veld.
+     */
+    @Test
+    public void testGetLadder2 () {
+        Ladder ladder = new Ladder();
+        veld.addSpelItem(ladder);
+        Ladder expResult = ladder;
+        Ladder result = veld.getLadder();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of hasMuur method, of class Veld.
+     */
+    @Test
+    public void testHasMuur () {
+        boolean expResult = false;
+        boolean result = veld.hasMuur();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of hasMuur method, of class Veld.
+     */
+    @Test
+    public void testHasMuur2 () {
+        veld.addSpelItem(new Muur());
+        boolean expResult = true;
+        boolean result = veld.hasMuur();
+        assertEquals(expResult, result);
     }
 }
