@@ -13,7 +13,6 @@ import java.util.Iterator;
  */
 public class Helper extends PowerUp {
 
-    private Held held;
     private ArrayList<Veld> onbezochteVelden;
     private ArrayList<Veld> bezochteVelden;
     
@@ -30,12 +29,11 @@ public class Helper extends PowerUp {
      */
     @Override
     public void actie (Held held, Iterator iter) {
-        this.held = held;
         onbezochteVelden = new ArrayList<>();
         bezochteVelden = new ArrayList<>();
         Veld start = getVeld();
         start.setAfstand(0);
-        vulOnbezochteVelden(start);
+        vulOnbezochteVelden(start, held);
         if (vindRoute(start, einde)) {
             markeerRoute(einde);
         }
@@ -46,7 +44,7 @@ public class Helper extends PowerUp {
      * Vult een arrayList met alle velden waar de held kan komen.
      * Als het veld de vriend bevat wordt deze opgeslagen als einde.
      */
-    private void vulOnbezochteVelden (Veld huidigVeld) {
+    private void vulOnbezochteVelden (Veld huidigVeld, Held held) {
         Richtingen[] richtingen = {Richtingen.NORTH, Richtingen.EAST, Richtingen.SOUTH, Richtingen.WEST};
         for (Richtingen richting : richtingen) {
             Veld veld = huidigVeld.getNeighbour(richting);
@@ -56,7 +54,7 @@ public class Helper extends PowerUp {
                     if (veld.hasVriend())
                         einde = veld;
                     onbezochteVelden.add(veld);
-                    vulOnbezochteVelden(veld);
+                    vulOnbezochteVelden(veld, held);
                 }
             }
         }

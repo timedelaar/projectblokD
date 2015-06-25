@@ -45,7 +45,7 @@ public class Spel extends JPanel {
     /*
      * Maakt de menu's en voegt ze toe aan een card layout.
      */
-    public void createMenus () {
+    private void createMenus () {
         menu = new Menu();
         menu.setPreferredSize(new Dimension(width, height));
         helpMenu = new HelpMenu();

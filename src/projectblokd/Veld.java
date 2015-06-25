@@ -33,7 +33,7 @@ public class Veld extends JComponent {
         setImage("veld.png");
     }
     
-    public final void setImage (String ref) {
+    private void setImage (String ref) {
         this.image = ImageStorage.get().getImage(ref);
     }
     

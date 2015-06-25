@@ -22,10 +22,9 @@ import javax.swing.*;
  */
 public class Doolhof extends JPanel {
     
-    
     private int width;
     private int height;
-    private int VELD_SIZE;
+    private int veldSize;
     private String currentMaze;
     
     private Knop resetKnop;
@@ -53,7 +52,7 @@ public class Doolhof extends JPanel {
      */
     private int[][] defaultLayout = {{ 7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7},
                                      { 7, 11, 11, 11, 11, 11, 11, 11, 11, 11,  3,  0,  0,  0,  0,  0,  0,  0, 11,  7},
-                                     { 7,  2,  0,  0,  0,  0, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11,  0, 11,  7},
+                                     { 7,  2,  0,  0,  0,  0, 11, 11, 14, 11, 11, 11, 11, 11, 11, 11, 11,  0, 11,  7},
                                      { 7, 11,  0, 11, 11,  0,  0,  0,  0, 11,  0,  0,  0,  0,  0,  0, 12,  1, 11,  7},
                                      { 7, 11,  0, 11, 11, 11, 11, 11,  0, 11,  0, 11, 11,  6, 11,  0, 12,  0, 11,  7},
                                      { 7, 11,  0, 11, 11, 11,  4,  0,  0, 11,  0, 11, 11,  6,  0,  0, 12,  0, 11,  7},
@@ -68,8 +67,8 @@ public class Doolhof extends JPanel {
                                      { 7, 12,  9,  9,  9,  9,  9,  9,  9, 11, 11,  0, 11,  0, 11,  9, 11,  4, 11,  7},
                                      { 7,  9,  9,  9,  9,  9, 11, 11,  1, 11,  0,  0, 11,  0, 11,  9, 11,  9, 11,  7},
                                      { 7,  9,  9,  9,  9,  9,  9, 11,  0, 11, 11,  0,  0,  0, 11,  9,  9,  9, 11,  7},
-                                     { 7,  9,  0, 11, 11, 11, 11, 11,  0, 11, 11, 11, 11, 11, 11,  9, 11,  9, 11,  7},
-                                     { 7,  9,  0,  6, 11,  6,  9,  9,  0,  0,  0,  0,  0,  0,  0,  0,  0, 11, 11,  7},
+                                     { 7,  9, 14, 11, 11, 11, 11, 11,  0, 11, 11, 11, 11, 11, 11,  9, 11,  9, 11,  7},
+                                     { 7,  9,  0,  6, 11,  6,  9,  9,  0,  0,  0,  0,  0,  0,  0,  0, 13, 11, 11,  7},
                                      { 7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7}};
     
     private int[][] doolhofLayout;
@@ -80,32 +79,28 @@ public class Doolhof extends JPanel {
         this.width = width;
         this.height = height;
         currentMaze = maze;
+        init();
+        maakScoreBoard();
+        addResetKnop();
+        maakDoolhof(KBListener);
+        startScoreTimer();
+    }
+    
+    private void init () {
+        setLayout(null);
         try {
-            ObjectInputStream inStream = new ObjectInputStream(new FileInputStream(maze + ".ttxt"));
+            ObjectInputStream inStream = new ObjectInputStream(new FileInputStream(currentMaze + ".txt"));
             doolhofLayout = (int[][]) inStream.readObject();
         }
         catch (Exception e) {
             System.out.println(e);
             doolhofLayout = defaultLayout;
         }
-        init();
-        maakScoreBoard();
-        addResetKnop();
-        long time = System.currentTimeMillis();
-        System.out.println("Start");
-        maakDoolhof(KBListener);
-        time = System.currentTimeMillis() - time;
-        System.out.println("Done in " + time + "ms");
-        startScoreTimer();
-    }
-    
-    private void init () {
-        setLayout(null);
         if (width <= height) {
-            VELD_SIZE = width / doolhofLayout.length;
+            veldSize = width / doolhofLayout.length;
         }
         else {
-            VELD_SIZE = height / doolhofLayout.length;
+            veldSize = height / doolhofLayout.length;
         }
     }
     
@@ -197,11 +192,11 @@ public class Doolhof extends JPanel {
      * return - het zojuist aangemaakte veld.
      */
     private Veld addVeld (int x, int y) {
-        int xCord = x * VELD_SIZE;
-        int yCord = y * VELD_SIZE;
+        int xCord = x * veldSize;
+        int yCord = y * veldSize;
         Veld veld = new Veld();
         add(veld);
-        veld.setSize(VELD_SIZE, VELD_SIZE);
+        veld.setSize(veldSize, veldSize);
         veld.setLocation(xCord, yCord);
         return veld;
     }
